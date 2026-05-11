@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Security: vanilla framework 0 + meta tag CSP (GitHub Pages 가 HTTP header 설정 불가하므로 meta tag 정공) -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://api.github.com; base-uri 'self'; form-action 'self'; object-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy"
+        content="interest-cohort=(), browsing-topics=(), geolocation=(), camera=(), microphone=(), payment=()">
+
+  <title>AnotherPlayer — Native sample browser for sound design</title>
+  <meta name="description" content="Native sample browser for sound design. Cold start under 2s, sample-accurate seamless loops, native on Mac and Windows.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="AnotherPlayer">
+  <meta property="og:description" content="Native sample browser for sound design. Free forever.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://anotherplayer.com">
+
+  <!-- Font preload (LCP 가속, woff2 4 weight 중 hero h1 의 700 우선) -->
+  <link rel="preload" href="fonts/geist-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/geist-400.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="style.css">
+  <!-- developed by external observation only, no decompilation, no reverse engineering -->
+</head>
+<body>
+  <nav class="nav">
+    <a class="nav-brand" href="/">AnotherPlayer</a>
+    <a class="nav-link" href="https://github.com/Bbins-dev/AnotherPlayer">GitHub &rarr;</a>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">v1.0 &middot; Free &middot; Mac &amp; Windows</p>
+      <h1 class="hero-title">
+        Native sample browser.<br>
+        Built for sound design.
+      </h1>
+      <p class="hero-subhead">
+        Cold start under 2s. Sample-accurate loops.<br>
+        Native everywhere.
+      </p>
+      <a id="cta" class="cta" href="https://github.com/Bbins-dev/AnotherPlayer/releases/latest" rel="noopener">
+        <span class="cta-arrow" aria-hidden="true">&darr;</span>
+        <span id="cta-label">Download</span>
+      </a>
+      <p class="toggle">
+        <a id="toggle-win" href="#" rel="noopener">Windows</a>
+        <span class="toggle-sep" aria-hidden="true">&middot;</span>
+        <a id="toggle-mac" href="#" rel="noopener">macOS</a>
+      </p>
+    </section>
+
+    <hr class="divider" aria-hidden="true">
+
+    <section class="features" aria-label="Features">
+      <h2>Real-time waveform.</h2>
+      <h2>Instant search across your entire disk.</h2>
+      <h2>Sample-accurate, seamless loops.</h2>
+      <h2>Native on Mac and Windows.</h2>
+      <h2>Drag out &mdash; anywhere.</h2>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Bobin Seo &middot; Free forever &middot; <a href="https://github.com/Bbins-dev/AnotherPlayer/releases" rel="noopener">GitHub Releases</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
