@@ -46,11 +46,17 @@ function wireToggles() {
   }
 }
 
-function wireCommercialLink() {
-  const link = document.getElementById('commercial-link');
-  if (link) link.href = COMMERCIAL_LICENSE_URL;
+function wireCommercialLinks() {
+  // Footer + nav 양쪽 동일 URL SSOT (Lemon Squeezy storefront, M-6 확정).
+  const links = [
+    document.getElementById('commercial-link'),
+    document.getElementById('nav-buy'),
+  ];
+  for (const el of links) {
+    if (el) el.href = COMMERCIAL_LICENSE_URL;
+  }
 }
 
 applyCTA(detectOS());
 wireToggles();
-wireCommercialLink();
+wireCommercialLinks();

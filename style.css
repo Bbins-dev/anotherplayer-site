@@ -116,10 +116,35 @@ a:focus-visible {
   letter-spacing: 0.02em;
 }
 
-.nav-link {
-  font-size: 14px;
+/* Nav-right ghost button — secondary CTA (산업 표준: Stripe / Vercel / Linear 식).
+   다운로드보다 낮은 우선순위 (filled X, outline O), visible. */
+.nav-buy {
+  font-size: 13px;
   font-weight: 500;
-  color: var(--text-subtle);
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  transition: border-color 200ms ease, color 200ms ease, transform 200ms ease;
+  white-space: nowrap;
+}
+
+.nav-buy:hover {
+  color: var(--accent-hover);
+  border-color: var(--accent-grad-end);
+  transform: translateY(-1px);
+}
+
+.nav-buy:focus-visible {
+  outline: 2px solid var(--accent-grad-end);
+  outline-offset: 4px;
+}
+
+@media (max-width: 600px) {
+  .nav-buy {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
 }
 
 /* ---------- Layout main ---------- */
