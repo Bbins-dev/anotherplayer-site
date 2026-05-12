@@ -4,7 +4,7 @@
 // Binary host = Cloudflare R2 (download.anotherplayer.com subdomain → R2 binding).
 // 사용자 URL 표면 통일 — GitHub URL 외부 노출 0.
 const MAC_DMG_URL = 'https://download.anotherplayer.com/AnotherPlayer-1.0.0.dmg';
-const WIN_SETUP_URL = 'https://download.anotherplayer.com/AnotherPlayer-Setup.exe';
+const WIN_SETUP_URL = 'https://download.anotherplayer.com/AnotherPlayer-win-Setup.exe';
 const DOWNLOAD_LATEST = 'https://download.anotherplayer.com/';
 
 // Commercial license storefront = Lemon Squeezy (M-6 storefront create 시점 URL 확정).
