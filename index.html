@@ -6,26 +6,26 @@
 
   <!-- Security: vanilla framework 0 + meta tag CSP (spec § 10-bis) -->
   <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data: https://anotherplayer.com; connect-src 'self' https://api.github.com; base-uri 'self'; form-action 'self'; object-src 'none'">
+        content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data: https://anotherplayer.com; connect-src 'self' https://api.binboxgames.com; base-uri 'self'; form-action 'self'; object-src 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="Permissions-Policy"
         content="interest-cohort=(), browsing-topics=(), geolocation=(), camera=(), microphone=(), payment=()">
 
   <!-- SEO core -->
   <title>AnotherPlayer — Native sample browser for professionals</title>
-  <meta name="description" content="Native sample browser built for sound designers, producers, and composers. Gapless loops, instant search across every disk, drag out into any DAW. Free for Mac and Windows.">
+  <meta name="description" content="Native sample browser built for sound designers, producers, and composers. Gapless loops, instant search across every disk, drag out into any DAW. Free for personal use on Mac and Windows.">
   <meta name="keywords" content="sample browser, audio player, sound design, music production, DAW, gapless loop, sample-accurate, Mac, Windows">
-  <meta name="author" content="Bobin Seo">
+  <meta name="author" content="Binbox Games">
   <link rel="canonical" href="https://anotherplayer.com/">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#303446">
   <meta name="color-scheme" content="dark">
 
-  <!-- Open Graph (Facebook / LinkedIn / Slack / Discord preview) -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="AnotherPlayer">
   <meta property="og:title" content="AnotherPlayer — Native sample browser for professionals">
-  <meta property="og:description" content="Gapless loops, instant search across every disk, drag out into any DAW. Free for Mac and Windows.">
+  <meta property="og:description" content="Gapless loops, instant search across every disk, drag out into any DAW. Free for personal use on Mac and Windows.">
   <meta property="og:url" content="https://anotherplayer.com/">
   <meta property="og:image" content="https://anotherplayer.com/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -33,10 +33,10 @@
   <meta property="og:image:alt" content="AnotherPlayer — Native sample browser for professionals">
   <meta property="og:locale" content="en_US">
 
-  <!-- Twitter Card (X preview) -->
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="AnotherPlayer — Native sample browser for professionals">
-  <meta name="twitter:description" content="Gapless loops, instant search across every disk, drag out into any DAW. Free for Mac and Windows.">
+  <meta name="twitter:description" content="Gapless loops, instant search across every disk, drag out into any DAW. Free for personal use on Mac and Windows.">
   <meta name="twitter:image" content="https://anotherplayer.com/og-image.png">
   <meta name="twitter:image:alt" content="AnotherPlayer — Native sample browser for professionals">
 
@@ -45,7 +45,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
 
-  <!-- Font preload (LCP 가속) -->
+  <!-- Font preload -->
   <link rel="preload" href="fonts/geist-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/geist-400.woff2" as="font" type="font/woff2" crossorigin>
 
@@ -64,11 +64,13 @@
     "offers": {
       "@type": "Offer",
       "price": "0",
-      "priceCurrency": "USD"
+      "priceCurrency": "USD",
+      "category": "Free for personal use"
     },
     "author": {
-      "@type": "Person",
-      "name": "Bobin Seo"
+      "@type": "Organization",
+      "name": "Binbox Games",
+      "email": "contact@binboxgames.com"
     }
   }
   </script>
@@ -77,7 +79,7 @@
 <body>
   <main>
     <section class="hero">
-      <p class="eyebrow">v1.0 &middot; Free &middot; Mac &amp; Windows</p>
+      <p class="eyebrow">v1.0 &middot; Free for personal use &middot; Mac &amp; Windows</p>
       <h1 class="hero-title">
         Native sample browser.<br>
         Built for professionals.
@@ -106,7 +108,12 @@
   </main>
 
   <footer>
-    <p>&copy; 2026 Bobin Seo &middot; Free forever</p>
+    <p class="footer-main">&copy; 2026 Binbox Games &middot; Free for personal use</p>
+    <p class="footer-meta">
+      <a id="commercial-link" href="#" rel="noopener">Commercial license &rarr;</a>
+      <span aria-hidden="true">&middot;</span>
+      <a href="mailto:contact@binboxgames.com">contact@binboxgames.com</a>
+    </p>
   </footer>
 
   <script src="script.js"></script>
