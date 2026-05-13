@@ -223,27 +223,6 @@ main {
   font-weight: 700;
 }
 
-/* ---------- OS toggle ---------- */
-.toggle {
-  font-size: 14px;
-  color: var(--text-subtle);
-}
-
-.toggle a {
-  color: var(--text-subtle);
-  padding: 4px 8px;
-  border-radius: 4px;
-}
-
-.toggle a:hover {
-  color: var(--accent-hover);
-}
-
-.toggle-sep {
-  margin: 0 var(--sp-1);
-  color: var(--text-faint);
-}
-
 /* ---------- Divider ---------- */
 .divider {
   border: 0;

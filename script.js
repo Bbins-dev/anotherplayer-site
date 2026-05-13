@@ -35,17 +35,6 @@ function applyCTA(os) {
   }
 }
 
-function wireToggles() {
-  const winToggle = document.getElementById('toggle-win');
-  const macToggle = document.getElementById('toggle-mac');
-  if (winToggle) {
-    winToggle.addEventListener('click', (e) => { e.preventDefault(); applyCTA('win'); });
-  }
-  if (macToggle) {
-    macToggle.addEventListener('click', (e) => { e.preventDefault(); applyCTA('mac'); });
-  }
-}
-
 // Buy modal — nav-buy click 또는 ?buy=1 query 로 진입.
 // 상태 머신 + fetch wrapper 는 B.5 에서 구현. 본 task = open trigger 만.
 const buyModal = document.getElementById('buy-modal');
@@ -186,5 +175,4 @@ function wireBuyModal() {
 }
 
 applyCTA(detectOS());
-wireToggles();
 wireBuyModal();
