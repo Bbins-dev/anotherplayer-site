@@ -7,9 +7,9 @@ const MAC_DMG_URL = 'https://download.anotherplayer.com/AnotherPlayer-1.0.1.dmg'
 const WIN_SETUP_URL = 'https://download.anotherplayer.com/AnotherPlayer-1.0.1-Setup.exe';
 const DOWNLOAD_LATEST = 'https://download.anotherplayer.com/';
 
-// Commercial license storefront = Lemon Squeezy (M-6 storefront create 시점 URL 확정).
-// 현재 = placeholder, M-6 진입 후 갱신 의무.
-const COMMERCIAL_LICENSE_URL = 'mailto:contact@binboxgames.com?subject=Commercial%20license%20inquiry';
+// Commercial license backend = Cloudflare Workers (M-6 backend).
+// Modal 안 fetch 호출 진입점 SSOT (B.5 state machine 에서 사용).
+const API_BASE = 'https://api.binboxgames.com';
 
 function detectOS() {
   const platform = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '';
@@ -46,17 +46,40 @@ function wireToggles() {
   }
 }
 
-function wireCommercialLinks() {
-  // Footer + nav 양쪽 동일 URL SSOT (Lemon Squeezy storefront, M-6 확정).
-  const links = [
-    document.getElementById('commercial-link'),
-    document.getElementById('nav-buy'),
-  ];
-  for (const el of links) {
-    if (el) el.href = COMMERCIAL_LICENSE_URL;
+// Buy modal — nav-buy click 또는 ?buy=1 query 로 진입.
+// 상태 머신 + fetch wrapper 는 B.5 에서 구현. 본 task = open trigger 만.
+const buyModal = document.getElementById('buy-modal');
+
+function openBuyModal() {
+  if (!buyModal) return;
+  resetModalToStep(1);
+  buyModal.showModal();
+}
+
+function closeBuyModal() {
+  if (!buyModal) return;
+  buyModal.close();
+}
+
+// Placeholder — actual state machine defined in B.5 (state machine + fetch wrappers).
+function resetModalToStep(_n) {
+  // No-op for now; B.5 implements step navigation.
+}
+
+function wireBuyModal() {
+  const navBuy = document.getElementById('nav-buy');
+  if (navBuy) {
+    navBuy.addEventListener('click', (e) => {
+      e.preventDefault();
+      openBuyModal();
+    });
+  }
+  // ?buy=1 query string → auto-open (외부 링크 진입점, 결제 redirect 복귀 등).
+  if (new URLSearchParams(window.location.search).get('buy') === '1') {
+    openBuyModal();
   }
 }
 
 applyCTA(detectOS());
 wireToggles();
-wireCommercialLinks();
+wireBuyModal();
