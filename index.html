@@ -119,6 +119,50 @@
     </p>
   </footer>
 
+  <dialog id="buy-modal" aria-labelledby="buy-modal-title">
+    <div class="modal-card">
+      <header class="modal-header">
+        <h2 id="buy-modal-title">Buy commercial license</h2>
+        <button type="button" class="modal-close" aria-label="Close" data-action="close">×</button>
+      </header>
+
+      <section class="modal-step" data-step="1">
+        <p class="step-indicator">Step 1 of 3 — Email</p>
+        <label>Your email <input type="email" id="email-1" required autocomplete="email"></label>
+        <label>Confirm email <input type="email" id="email-2" required autocomplete="email"></label>
+        <p class="modal-help">We'll send a 6-digit verification code before checkout.</p>
+        <p class="modal-error" aria-live="polite" id="step1-error"></p>
+        <div class="modal-actions">
+          <button type="button" data-action="close">Cancel</button>
+          <button type="button" data-action="send-otp">Send code</button>
+        </div>
+      </section>
+
+      <section class="modal-step" data-step="2" hidden>
+        <p class="step-indicator">Step 2 of 3 — Verify</p>
+        <p>Code sent to <span id="email-display"></span></p>
+        <label>6-digit code <input type="text" id="otp-code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code"></label>
+        <button type="button" id="resend-btn" data-action="resend-otp" disabled>Resend code (30s)</button>
+        <p class="modal-error" aria-live="polite" id="step2-error"></p>
+        <div class="modal-actions">
+          <button type="button" data-action="back-to-step1">Back</button>
+          <button type="button" data-action="verify-otp">Verify</button>
+        </div>
+      </section>
+
+      <section class="modal-step" data-step="3" hidden>
+        <p class="step-indicator">Step 3 of 3 — Checkout</p>
+        <p>Email verified ✓</p>
+        <p>Your license key will be sent to: <strong id="verified-email-display"></strong></p>
+        <p class="modal-error" aria-live="polite" id="step3-error"></p>
+        <div class="modal-actions">
+          <button type="button" data-action="back-to-step2">Back</button>
+          <button type="button" data-action="continue-checkout">Continue to checkout</button>
+        </div>
+      </section>
+    </div>
+  </dialog>
+
   <script src="script.js"></script>
 </body>
 </html>
