@@ -318,3 +318,119 @@ footer a:hover {
     margin: var(--sp-6) auto;
   }
 }
+
+/* M-6b modal — Frappé palette 정합 */
+#buy-modal {
+  border: none;
+  background: transparent;
+  padding: 0;
+  max-width: 460px;
+  width: 92%;
+}
+#buy-modal::backdrop {
+  background: rgba(35, 38, 52, 0.78);
+  backdrop-filter: blur(4px);
+}
+.modal-card {
+  background: #292c3c;
+  color: #c6d0f5;
+  border: 1px solid #51576d;
+  border-radius: 12px;
+  padding: 24px 28px;
+  font-family: inherit;
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.modal-header h2 {
+  font-size: 18px;
+  margin: 0;
+  color: #f4b8e4;
+}
+.modal-close {
+  background: transparent;
+  border: none;
+  color: #c6d0f5;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+.step-indicator {
+  font-size: 12px;
+  color: #a5adce;
+  margin: 8px 0 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.modal-step label {
+  display: block;
+  margin: 10px 0;
+  font-size: 14px;
+}
+.modal-step input {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px 12px;
+  background: #232634;
+  color: #c6d0f5;
+  border: 1px solid #51576d;
+  border-radius: 6px;
+  font: inherit;
+}
+.modal-step input:focus {
+  outline: 2px solid #f4b8e4;
+  outline-offset: 1px;
+}
+.modal-help {
+  font-size: 12px;
+  color: #a5adce;
+  margin: 8px 0;
+}
+.modal-error {
+  color: #e78284;
+  font-size: 13px;
+  min-height: 18px;
+  margin: 8px 0;
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+.modal-actions button {
+  padding: 9px 18px;
+  background: #232634;
+  color: #c6d0f5;
+  border: 1px solid #51576d;
+  border-radius: 6px;
+  font: inherit;
+  cursor: pointer;
+}
+.modal-actions button[data-action="send-otp"],
+.modal-actions button[data-action="verify-otp"],
+.modal-actions button[data-action="continue-checkout"] {
+  background: linear-gradient(90deg, #a6d189, #ef9f76);
+  color: #232634;
+  border-color: transparent;
+  font-weight: 600;
+}
+.modal-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+#resend-btn {
+  display: block;
+  margin: 12px 0;
+  padding: 6px 12px;
+  background: transparent;
+  color: #a5adce;
+  border: 1px dashed #51576d;
+  border-radius: 4px;
+  font: inherit;
+  cursor: pointer;
+}
