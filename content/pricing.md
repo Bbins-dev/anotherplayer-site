@@ -37,7 +37,7 @@ Two ways to use AnotherPlayer.
 
 ### Refund policy?
 
-Within 14 days for EU/EEA/UK customers (cooling-off period) and 7 days for South Korean customers (unconditional cancel right). All other regions: 14 days at Paddle's discretion. See [Refund Policy](/refund) for details.
+We offer a 14-day unconditional refund to every customer, regardless of region — no questions asked. See [Refund Policy](/refund) for details.
 
 ### What's the difference between Personal and Commercial?
 
