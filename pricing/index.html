@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing — AnotherPlayer</title>
+<meta name="description" content="AnotherPlayer — Native sample browser. Built for professionals.">
+<meta name="theme-color" content="#303446">
+<meta name="color-scheme" content="dark">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="canonical" href="https://anotherplayer.com/pricing">
+<link rel="stylesheet" href="/style.css">
+<!-- developed by external observation only, no decompilation -->
+</head>
+<body class="page page-pricing">
+<nav class="nav">
+  <a class="nav-brand" href="/">AnotherPlayer</a>
+  <a class="nav-pricing" href="/pricing">Pricing</a>
+</nav>
+<main class="page-content">
+<h1>Simple pricing</h1>
+<p>Two ways to use AnotherPlayer.</p>
+<div class="pricing-grid">
+  <article class="pricing-card">
+    <h2 class="pricing-name">Free</h2>
+    <p class="pricing-tagline">for personal use</p>
+    <p class="pricing-price"><span class="amount">$0</span></p>
+    <a class="pricing-cta pricing-cta-secondary" id="free-download-cta" href="https://download.anotherplayer.com/"><span class="cta-arrow">↓</span> <span class="cta-label">Download</span></a>
+    <p class="pricing-os-toggle">
+      <a href="#" class="toggle-link" data-os="win">Windows 10+</a>
+      <span class="toggle-dot">·</span>
+      <a href="#" class="toggle-link" data-os="mac">macOS 11+</a>
+    </p>
+    <ul class="pricing-features">
+      <li>All v1 features</li>
+      <li>Personal use only</li>
+      <li>Single user, any device</li>
+    </ul>
+  </article>
+  <article class="pricing-card pricing-card-featured">
+    <h2 class="pricing-name">Commercial</h2>
+    <p class="pricing-tagline">one-time, perpetual</p>
+    <p class="pricing-price"><span class="amount">$120</span> <span class="unit">USD</span></p>
+    <a class="pricing-cta pricing-cta-primary" id="buy-commercial-cta" href="#">Buy commercial license</a>
+    <ul class="pricing-features">
+      <li>All v1 features</li>
+      <li>Commercial use</li>
+      <li>For studio, business, or freelance</li>
+      <li>Up to 5 devices per license</li>
+    </ul>
+  </article>
+</div>
+
+<h2>FAQ</h2>
+<h3>Refund policy?</h3>
+<p>Within 14 days for EU/EEA/UK customers (cooling-off period) and 7 days for South Korean customers (unconditional cancel right). All other regions: 14 days at Paddle's discretion. See <a href="/refund">Refund Policy</a> for details.</p>
+<h3>What's the difference between Personal and Commercial?</h3>
+<p>Personal (Free) is for individual, non-commercial use by a single user. Commercial is for use in a studio, business, or freelance context, including any work performed for compensation. See <a href="/terms">Terms</a> for full license grant.</p>
+<h3>Device limit?</h3>
+<p>Commercial licenses allow activation on up to 5 devices per user. Free is personal — single user, any device. Manage active devices in Settings → My devices within the app.</p>
+<h3>Will the price increase when v2 ships?</h3>
+<p>Your v1 Commercial license retains all v1 features for life. v2 features (planned: auto-tagging, tag search, advanced metering, DSP) are a separate offering.</p>
+<h3>When do I receive my license key?</h3>
+<p>Immediately after checkout. The key is emailed by Resend to the email address you provided to Paddle. Activate it in the app: Settings → License → Register.</p>
+<h3>Payment methods?</h3>
+<p>See the Paddle checkout for all supported payment methods (vendor policy).</p>
+</main>
+<footer class="footer">
+  <a href="/terms">Terms</a>
+  <span class="dot">·</span>
+  <a href="/privacy">Privacy</a>
+  <span class="dot">·</span>
+  <a href="/refund">Refund</a>
+  <span class="dot">·</span>
+  <a href="mailto:contact@binboxgames.com">Contact</a>
+  <div class="copyright">© 2026 Binbox Games</div>
+</footer>
+
+<dialog id="buy-modal" aria-labelledby="buy-modal-title">
+  <div class="modal-card">
+    <header class="modal-header">
+      <h2 id="buy-modal-title">Buy commercial license</h2>
+      <button type="button" class="modal-close" aria-label="Close" data-action="close">×</button>
+    </header>
+
+    <section class="modal-step" data-step="1">
+      <p class="step-indicator">Step 1 of 3 — Email</p>
+      <label>Your email <input type="email" id="email-1" required autocomplete="email"></label>
+      <label>Confirm email <input type="email" id="email-2" required autocomplete="email"></label>
+      <p class="modal-help">We'll send a 6-digit verification code before checkout.</p>
+      <p class="modal-error" aria-live="polite" id="step1-error"></p>
+      <div class="modal-actions">
+        <button type="button" data-action="close">Cancel</button>
+        <button type="button" data-action="send-otp">Send code</button>
+      </div>
+    </section>
+
+    <section class="modal-step" data-step="2" hidden>
+      <p class="step-indicator">Step 2 of 3 — Verify</p>
+      <p>Code sent to <span id="email-display"></span></p>
+      <label>6-digit code <input type="text" id="otp-code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code"></label>
+      <button type="button" id="resend-btn" data-action="resend-otp" disabled>Resend code (30s)</button>
+      <p class="modal-error" aria-live="polite" id="step2-error"></p>
+      <div class="modal-actions">
+        <button type="button" data-action="back-to-step1">Back</button>
+        <button type="button" data-action="verify-otp">Verify</button>
+      </div>
+    </section>
+
+    <section class="modal-step" data-step="3" hidden>
+      <p class="step-indicator">Step 3 of 3 — Checkout</p>
+      <p>Email verified ✓</p>
+      <p>Your license key will be sent to: <strong id="verified-email-display"></strong></p>
+      <p class="modal-error" aria-live="polite" id="step3-error"></p>
+      <div class="modal-actions">
+        <button type="button" data-action="back-to-step2">Back</button>
+        <button type="button" data-action="continue-checkout">Continue to checkout</button>
+      </div>
+    </section>
+  </div>
+</dialog>
+
+<script src="/script.js"></script>
+</body>
+</html>

@@ -116,32 +116,33 @@ a:focus-visible {
   letter-spacing: 0.02em;
 }
 
-/* Nav-right ghost button — secondary CTA (산업 표준: Stripe / Vercel / Linear 식).
-   다운로드보다 낮은 우선순위 (filled X, outline O), visible. */
-.nav-buy {
+/* Nav Pricing CTA — primary marketing entry point.
+   Download CTA 와 동일한 Evergreen → Peach gradient + dark text 로 강조. */
+.nav-pricing {
   font-size: 13px;
-  font-weight: 500;
-  color: var(--text-primary);
+  font-weight: 600;
+  color: var(--cta-text-on-grad);
   padding: 8px 16px;
-  border: 1px solid var(--border-subtle);
+  background: linear-gradient(to right, var(--accent-grad-start), var(--accent-grad-end));
   border-radius: 8px;
-  transition: border-color 200ms ease, color 200ms ease, transform 200ms ease;
+  transition: filter 200ms ease, transform 200ms ease, box-shadow 200ms ease;
   white-space: nowrap;
+  text-decoration: none;
 }
 
-.nav-buy:hover {
-  color: var(--accent-hover);
-  border-color: var(--accent-grad-end);
+.nav-pricing:hover {
+  filter: brightness(1.05);
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 159, 118, 0.25);
 }
 
-.nav-buy:focus-visible {
+.nav-pricing:focus-visible {
   outline: 2px solid var(--accent-grad-end);
   outline-offset: 4px;
 }
 
 @media (max-width: 600px) {
-  .nav-buy {
+  .nav-pricing {
     font-size: 12px;
     padding: 6px 12px;
   }
@@ -167,6 +168,185 @@ main {
   text-transform: uppercase;
   color: var(--text-subtle);
   margin-bottom: var(--sp-3);
+}
+
+.toggle {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-subtle);
+  line-height: 1;
+  margin-top: var(--sp-3);
+  text-align: center;
+}
+
+.toggle-link {
+  color: var(--text-subtle);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 120ms ease;
+}
+
+.toggle-link:hover,
+.toggle-link.active {
+  color: var(--accent-hover);
+}
+
+.toggle-dot {
+  margin: 0 var(--sp-1);
+  color: var(--text-subtle);
+  opacity: 0.6;
+}
+
+/* ---------- Pricing cards (M-4b /pricing 카드 비교 layout) ---------- */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--sp-4);
+  margin: var(--sp-6) 0;
+  max-width: 720px;
+}
+
+.pricing-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.pricing-card-featured {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--bg-elevated), var(--bg-elevated)) padding-box,
+    linear-gradient(to right, var(--accent-grad-start), var(--accent-grad-end)) border-box;
+  box-shadow: 0 8px 24px rgba(239, 159, 118, 0.12);
+}
+
+.page-content h2.pricing-name {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.pricing-tagline {
+  font-size: 14px;
+  color: var(--text-subtle);
+  margin: 0;
+}
+
+.pricing-price {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: var(--sp-1) 0;
+  line-height: 1;
+}
+
+.pricing-price .unit {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-subtle);
+  margin-left: var(--sp-1);
+  vertical-align: super;
+}
+
+/* Specificity bump — .page-content a (0,2,0) override 회피, dark text 유지 */
+.page-content a.pricing-cta {
+  display: inline-block;
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: filter 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+  cursor: pointer;
+}
+
+.page-content a.pricing-cta-primary {
+  background: linear-gradient(to right, var(--accent-grad-start), var(--accent-grad-end));
+  color: var(--cta-text-on-grad);
+}
+
+.page-content a.pricing-cta-primary:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 159, 118, 0.25);
+  color: var(--cta-text-on-grad);
+}
+
+.page-content a.pricing-cta-secondary {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+
+.page-content a.pricing-cta-secondary .cta-arrow {
+  margin-right: var(--sp-1);
+  color: var(--accent-hover);
+  font-weight: 700;
+}
+
+.page-content a.pricing-cta-secondary:hover {
+  background: var(--bg-elevated);
+  border-color: var(--accent-grad-end);
+  color: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Pricing OS toggle — .page-content a override 차단 (default text-subtle, hover/active Peach) */
+.page-content a.toggle-link {
+  color: var(--text-subtle);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 120ms ease;
+}
+
+.page-content a.toggle-link:hover,
+.page-content a.toggle-link.active {
+  color: var(--accent-hover);
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.pricing-features li {
+  font-size: 14px;
+  color: var(--text-subtle);
+  padding-left: var(--sp-3);
+  position: relative;
+}
+
+.pricing-features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--accent-hover);
+  font-weight: 600;
+}
+
+.pricing-os-toggle {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-subtle);
+  line-height: 1;
+  margin: var(--sp-1) 0 0;
+  text-align: center;
+}
+
+/* /pricing 페이지 nav [Pricing] 버튼 자기참조 hide — build-time body class scope, flash 0 */
+.page-pricing .nav-pricing {
+  display: none;
 }
 
 .hero-title {
@@ -412,4 +592,82 @@ footer a:hover {
   border-radius: 4px;
   font: inherit;
   cursor: pointer;
+}
+
+/* M-4b 4 페이지 공통 layout */
+.page {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: "Geist", -apple-system, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+/* policy 페이지 nav — hero .nav 와 스코프 분리 (.page body class 한정) */
+.page .nav {
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--border-subtle);
+  max-width: unset;
+  margin: unset;
+  justify-content: flex-start;
+}
+.page .nav-brand {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: normal;
+}
+.page-content {
+  flex: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--sp-6) var(--sp-4);
+  line-height: 1.7;
+}
+.page-content h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  margin-bottom: var(--sp-4);
+}
+.page-content h2 {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 600;
+  margin-top: var(--sp-5);
+  margin-bottom: var(--sp-2);
+}
+.page-content a {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+.page-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--sp-2) 0;
+}
+.page-content th, .page-content td {
+  border: 1px solid var(--border-subtle);
+  padding: var(--sp-1) 12px;
+  text-align: left;
+}
+.footer {
+  padding: var(--sp-4);
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-subtle);
+  border-top: 1px solid var(--border-subtle);
+}
+.footer a {
+  color: var(--text-subtle);
+  text-decoration: none;
+}
+.footer a:hover {
+  color: var(--accent-hover);
+}
+.footer .dot {
+  margin: 0 var(--sp-1);
+}
+.footer .copyright {
+  margin-top: var(--sp-2);
+  opacity: 0.7;
 }

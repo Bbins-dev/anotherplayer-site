@@ -19,19 +19,23 @@ function detectOS() {
   return 'unknown';
 }
 
+// /pricing 의 Free Download CTA — OS auto-detect + label swap.
+// Hero CTA 는 static href="/pricing" + label "Download AnotherPlayer" 이라 JS 영향 X.
+// Label span 만 textContent 변경 (arrow icon 보존).
 function applyCTA(os) {
-  const cta = document.getElementById('cta');
-  const label = document.getElementById('cta-label');
-  if (!cta || !label) return;
+  const freeCTA = document.getElementById('free-download-cta');
+  if (!freeCTA) return;
+  const freeLabel = freeCTA.querySelector('.cta-label');
+  if (!freeLabel) return;
   if (os === 'mac') {
-    cta.href = MAC_DMG_URL;
-    label.textContent = 'Download for Mac';
+    freeCTA.href = MAC_DMG_URL;
+    freeLabel.textContent = 'Download for Mac';
   } else if (os === 'win') {
-    cta.href = WIN_SETUP_URL;
-    label.textContent = 'Download for Windows';
+    freeCTA.href = WIN_SETUP_URL;
+    freeLabel.textContent = 'Download for Win';
   } else {
-    cta.href = DOWNLOAD_LATEST;
-    label.textContent = 'Download';
+    freeCTA.href = DOWNLOAD_LATEST;
+    freeLabel.textContent = 'Download';
   }
 }
 
@@ -114,9 +118,11 @@ function startResendCooldown() {
 }
 
 function wireBuyModal() {
-  const navBuy = document.getElementById('nav-buy');
-  if (navBuy) {
-    navBuy.addEventListener('click', (e) => {
+  // [Buy commercial license] CTA on /pricing — primary modal trigger.
+  // Anchor child onclick is stripped by sanitizer; div-level listener catches bubble.
+  const buyCTA = document.getElementById('buy-commercial-cta');
+  if (buyCTA) {
+    buyCTA.addEventListener('click', (e) => {
       e.preventDefault();
       openBuyModal();
     });
@@ -174,5 +180,23 @@ function wireBuyModal() {
   });
 }
 
+function wireOSToggle() {
+  const links = document.querySelectorAll('.toggle-link');
+  if (!links.length) return;
+  const setActive = (os) => {
+    links.forEach((l) => l.classList.toggle('active', l.dataset.os === os));
+  };
+  links.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const os = link.dataset.os;
+      applyCTA(os);
+      setActive(os);
+    });
+  });
+  setActive(detectOS());
+}
+
 applyCTA(detectOS());
+wireOSToggle();
 wireBuyModal();
