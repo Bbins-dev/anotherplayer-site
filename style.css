@@ -105,6 +105,10 @@ a:focus-visible {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* width: 100% 로 cross-size 를 확정 — .page 의 flex-column 컨텍스트에서
+     auto margin 이 stretch 를 억제해 nav 가 content 폭으로 쪼그라드는 것을 차단.
+     block 컨텍스트(랜딩)에서는 기존 동작과 동일. */
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: var(--sp-3) var(--sp-4);
@@ -624,13 +628,10 @@ footer a:hover {
   display: flex;
   flex-direction: column;
 }
-/* Generated pages use the same nav geometry as the landing page. */
+/* 생성 페이지는 nav geometry 를 base `.nav` 에서 그대로 상속 —
+   여기서는 페이지 고유의 하단 divider 만 추가 (Single Source). */
 .page .nav {
-  padding: var(--sp-3) var(--sp-4);
   border-bottom: 1px solid var(--border-subtle);
-  max-width: 1200px;
-  margin: 0 auto;
-  justify-content: space-between;
 }
 .page .nav-brand {
   flex: 0 0 auto;
@@ -691,9 +692,7 @@ footer a:hover {
 }
 
 @media (max-width: 600px) {
-  .page .nav {
-    padding: var(--sp-2) var(--sp-3);
-  }
+  /* .page .nav 의 모바일 padding 은 base `.nav` @media 규칙이 그대로 커버 */
   .page-content {
     padding: 40px var(--sp-3) var(--sp-6);
   }
