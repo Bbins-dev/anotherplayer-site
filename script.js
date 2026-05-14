@@ -57,7 +57,7 @@ function applyCTA(os) {
 
 function loadReleaseMeta() {
   const script = document.createElement('script');
-  script.src = 'https://download.anotherplayer.com/latest.js';
+  script.src = `https://download.anotherplayer.com/latest.js?cache=${Date.now()}`;
   script.async = true;
   script.onload = () => {
     applyReleaseMeta();
