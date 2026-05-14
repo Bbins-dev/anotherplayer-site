@@ -4,6 +4,7 @@
 # 산출물:
 #   - og-image.png         (1200×630, Open Graph + Twitter Card preview)
 #   - apple-touch-icon.png (180×180, iOS home screen icon)
+#   - favicon.png          (32×32, browser tab icon)
 #
 # 외부 관찰 provenance: 자체 디자인 (Catppuccin Frappé 톤 + Evergreen→Peach gradient).
 # 어떤 third-party 도 분석/차용 0.
@@ -12,7 +13,7 @@ import os
 import sys
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-# Palette (style.css SSOT 정합)
+# Palette (style.css 기준 일관성)
 BG = (0x30, 0x34, 0x46)               # Frappé base
 TEXT_PRIMARY = (0xc6, 0xd0, 0xf5)
 TEXT_SUBTLE = (0xa5, 0xad, 0xce)
@@ -21,6 +22,15 @@ GRAD_END = (0xef, 0x9f, 0x76)         # Peach
 
 FONT_REGULAR = "/System/Library/Fonts/Helvetica.ttc"
 FONT_BOLD = "/System/Library/Fonts/Helvetica.ttc"
+APP_ICON_PATH = os.environ.get("ANOTHERPLAYER_APP_ICON") or os.path.abspath(os.path.join(
+    os.path.dirname(__file__),
+    "..",
+    "AnotherPlayer",
+    "src",
+    "AnotherPlayer.App",
+    "Assets",
+    "anp_icon.png",
+))
 
 
 def gradient_color(t, c0, c1):
@@ -49,7 +59,7 @@ def build_og_image(out_path):
     img = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(img)
 
-    # 미세 dot grid (style.css 의 24px spacing 정합, opacity 6%)
+    # 미세 dot grid (style.css 의 24px spacing 일관성, opacity 6%)
     dot_color = (0xc6, 0xd0, 0xf5, 15)
     dot_layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     dot_draw = ImageDraw.Draw(dot_layer)
@@ -91,41 +101,23 @@ def build_og_image(out_path):
 
 
 def build_apple_touch_icon(out_path):
-    """iOS home screen icon (180×180)."""
-    S = 180
-    SS = 4  # supersample for AA
-    big = Image.new("RGB", (S * SS, S * SS), BG)
-    draw = ImageDraw.Draw(big)
+    """iOS home screen icon (180×180) derived from the app icon."""
+    resize_app_icon(out_path, 180)
 
-    # Rounded rect background (전체 = BG, rounded corners)
-    radius = int(S * SS * 0.22)
-    # PIL ≥ 8.2 = rounded_rectangle 지원
-    bg_mask = Image.new("L", (S * SS, S * SS), 0)
-    bg_draw = ImageDraw.Draw(bg_mask)
-    bg_draw.rounded_rectangle([0, 0, S * SS - 1, S * SS - 1], radius=radius, fill=255)
 
-    # Brand "A" 가운데 (gradient fill via mask)
-    font_size = int(S * SS * 0.7)
-    a_font = ImageFont.truetype(FONT_BOLD, font_size)
-    letter_mask = Image.new("L", (S * SS, S * SS), 0)
-    letter_draw = ImageDraw.Draw(letter_mask)
-    bb = letter_draw.textbbox((0, 0), "A", font=a_font)
-    lw = bb[2] - bb[0]
-    lh = bb[3] - bb[1]
-    lx = (S * SS - lw) // 2 - bb[0]
-    ly = (S * SS - lh) // 2 - bb[1]
-    letter_draw.text((lx, ly), "A", fill=255, font=a_font)
-
-    gradient_img = horizontal_gradient((S * SS, S * SS), GRAD_START, GRAD_END)
-    big.paste(gradient_img, (0, 0), letter_mask)
-
-    # Rounded crop
-    final_ss = Image.new("RGBA", (S * SS, S * SS), (0, 0, 0, 0))
-    final_ss.paste(big, (0, 0), bg_mask)
-
-    final = final_ss.resize((S, S), Image.LANCZOS)
-    final.save(out_path, "PNG", optimize=True)
-    print(f"apple-touch-icon: {out_path} ({S}×{S}, {os.path.getsize(out_path)} bytes)")
+def resize_app_icon(out_path, size):
+    """Website icon derivative. Source must stay app icon asset."""
+    if not os.path.exists(APP_ICON_PATH):
+        print(
+            "ERROR: App icon not found. Set ANOTHERPLAYER_APP_ICON to "
+            "src/AnotherPlayer.App/Assets/anp_icon.png.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    icon = Image.open(APP_ICON_PATH).convert("RGBA")
+    icon = icon.resize((size, size), Image.LANCZOS)
+    icon.save(out_path, "PNG", optimize=True)
+    print(f"icon: {out_path} ({size}×{size}, {os.path.getsize(out_path)} bytes)")
 
 
 def main():
@@ -136,6 +128,7 @@ def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     build_og_image(os.path.join(script_dir, "og-image.png"))
     build_apple_touch_icon(os.path.join(script_dir, "apple-touch-icon.png"))
+    resize_app_icon(os.path.join(script_dir, "favicon.png"), 32)
 
 
 if __name__ == "__main__":
