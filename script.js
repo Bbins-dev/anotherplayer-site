@@ -4,9 +4,9 @@
 // Binary host = Cloudflare R2 (download.anotherplayer.com subdomain → R2 binding).
 // fallback 은 R2 latest.js 로딩 실패 시만 사용. release.yml 이 latest.js 를 갱신한다.
 const RELEASE_FALLBACK = {
-  version: '1.0.5',
-  macDmgUrl: 'https://download.anotherplayer.com/AnotherPlayer-1.0.5.dmg',
-  winSetupUrl: 'https://download.anotherplayer.com/AnotherPlayer-1.0.5-Setup.exe',
+  version: '1.0.6',
+  macDmgUrl: 'https://download.anotherplayer.com/AnotherPlayer-1.0.6.dmg',
+  winSetupUrl: 'https://download.anotherplayer.com/AnotherPlayer-1.0.6-Setup.exe',
 };
 const DOWNLOAD_LATEST = 'https://download.anotherplayer.com/';
 
