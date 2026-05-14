@@ -93,9 +93,12 @@ const buyState = {
 function resetModalToStep(n) {
   buyState.email = '';
   buyState.sessionId = '';
-  document.getElementById('email-1').value = '';
-  document.getElementById('email-2').value = '';
-  document.getElementById('otp-code').value = '';
+  const email1 = document.getElementById('email-1');
+  const email2 = document.getElementById('email-2');
+  const otpCode = document.getElementById('otp-code');
+  if (email1) email1.value = '';
+  if (email2) email2.value = '';
+  if (otpCode) otpCode.value = '';
   setError(1, '');
   setError(2, '');
   setError(3, '');
@@ -103,14 +106,16 @@ function resetModalToStep(n) {
 }
 
 function showStep(n) {
+  if (!buyModal) return;
   for (let i = 1; i <= 3; i++) {
     const sec = buyModal.querySelector(`.modal-step[data-step="${i}"]`);
-    sec.hidden = i !== n;
+    if (sec) sec.hidden = i !== n;
   }
 }
 
 function setError(step, msg) {
-  document.getElementById(`step${step}-error`).textContent = msg;
+  const target = document.getElementById(`step${step}-error`);
+  if (target) target.textContent = msg;
 }
 
 async function postJson(path, body) {

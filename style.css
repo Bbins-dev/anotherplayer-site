@@ -350,11 +350,6 @@ main {
   text-align: center;
 }
 
-/* /pricing 페이지 nav [Pricing] 버튼 자기참조 hide — build-time body class scope, flash 0 */
-.page-pricing .nav-pricing {
-  display: none;
-}
-
 .hero-title {
   font-size: clamp(40px, 8vw, 72px);
   font-weight: 700;
@@ -629,13 +624,13 @@ footer a:hover {
   display: flex;
   flex-direction: column;
 }
-/* policy 페이지 nav — hero .nav 와 스코프 분리 (.page body class 한정) */
+/* Generated pages use the same nav geometry as the landing page. */
 .page .nav {
   padding: var(--sp-3) var(--sp-4);
   border-bottom: 1px solid var(--border-subtle);
-  max-width: unset;
-  margin: unset;
-  justify-content: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: space-between;
 }
 .page .nav-brand {
   flex: 0 0 auto;
