@@ -2,13 +2,16 @@
 // vanilla JS, framework 0, NPM 0. developed by external observation only.
 
 // Binary host = Cloudflare R2 (download.anotherplayer.com subdomain → R2 binding).
-// 사용자 URL 표면 통일 — GitHub URL 외부 노출 0.
-const MAC_DMG_URL = 'https://download.anotherplayer.com/AnotherPlayer-1.0.2.dmg';
-const WIN_SETUP_URL = 'https://download.anotherplayer.com/AnotherPlayer-1.0.2-Setup.exe';
+// fallback 은 R2 latest.js 로딩 실패 시만 사용. release.yml 이 latest.js 를 갱신한다.
+const RELEASE_FALLBACK = {
+  version: '1.0.2',
+  macDmgUrl: 'https://download.anotherplayer.com/AnotherPlayer-1.0.2.dmg',
+  winSetupUrl: 'https://download.anotherplayer.com/AnotherPlayer-1.0.2-Setup.exe',
+};
 const DOWNLOAD_LATEST = 'https://download.anotherplayer.com/';
 
 // Commercial license backend = Cloudflare Workers (M-6 backend).
-// Modal 안 fetch 호출 진입점 SSOT (B.5 state machine 에서 사용).
+// Modal 안 fetch 호출 진입점 기준 (B.5 state machine 에서 사용).
 const API_BASE = 'https://api.binboxgames.com';
 
 function detectOS() {
@@ -19,24 +22,48 @@ function detectOS() {
   return 'unknown';
 }
 
+function currentRelease() {
+  return window.AnotherPlayerRelease || RELEASE_FALLBACK;
+}
+
+function applyReleaseMeta() {
+  const release = currentRelease();
+  const eyebrow = document.querySelector('.hero .eyebrow');
+  if (eyebrow && release.version) {
+    eyebrow.innerHTML = `v${release.version} &middot; Free for personal use`;
+  }
+}
+
 // /pricing 의 Free Download CTA — OS auto-detect + label swap.
 // Hero CTA 는 static href="/pricing" + label "Download AnotherPlayer" 이라 JS 영향 X.
 // Label span 만 textContent 변경 (arrow icon 보존).
 function applyCTA(os) {
+  const release = currentRelease();
   const freeCTA = document.getElementById('free-download-cta');
   if (!freeCTA) return;
   const freeLabel = freeCTA.querySelector('.cta-label');
   if (!freeLabel) return;
   if (os === 'mac') {
-    freeCTA.href = MAC_DMG_URL;
+    freeCTA.href = release.macDmgUrl;
     freeLabel.textContent = 'Download for Mac';
   } else if (os === 'win') {
-    freeCTA.href = WIN_SETUP_URL;
+    freeCTA.href = release.winSetupUrl;
     freeLabel.textContent = 'Download for Win';
   } else {
     freeCTA.href = DOWNLOAD_LATEST;
     freeLabel.textContent = 'Download';
   }
+}
+
+function loadReleaseMeta() {
+  const script = document.createElement('script');
+  script.src = 'https://download.anotherplayer.com/latest.js';
+  script.async = true;
+  script.onload = () => {
+    applyReleaseMeta();
+    applyCTA(detectOS());
+  };
+  document.head.appendChild(script);
 }
 
 // Buy modal — nav-buy click 또는 ?buy=1 query 로 진입.
@@ -55,7 +82,7 @@ function closeBuyModal() {
 }
 
 // Modal state machine — B.5.
-// 단일 buyState 객체 = 진행 중 email + sessionId + resend cooldown timer SSOT.
+// 단일 buyState 객체 = 진행 중 email + sessionId + resend cooldown timer 기준.
 // fetch wrapper postJson = credentials:'omit' (쿠키 0, 모든 인증은 명시적 sessionId payload).
 const buyState = {
   email: '',
@@ -197,6 +224,8 @@ function wireOSToggle() {
   setActive(detectOS());
 }
 
+applyReleaseMeta();
 applyCTA(detectOS());
 wireOSToggle();
 wireBuyModal();
+loadReleaseMeta();
