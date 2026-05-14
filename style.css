@@ -111,9 +111,12 @@ a:focus-visible {
 }
 
 .nav-brand {
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--text-primary);
+  text-decoration: none;
+  line-height: 1.2;
 }
 
 /* Nav Pricing CTA — primary marketing entry point.
@@ -150,6 +153,7 @@ a:focus-visible {
 
 /* ---------- Layout main ---------- */
 main {
+  width: 100%;
   max-width: 800px;
   margin: 0 auto;
   padding: 0 var(--sp-4);
@@ -158,7 +162,7 @@ main {
 /* ---------- Hero ---------- */
 .hero {
   text-align: center;
-  padding: var(--sp-7) 0 var(--sp-7);
+  padding: var(--sp-6) 0 var(--sp-7);
 }
 
 .eyebrow {
@@ -204,9 +208,11 @@ main {
   gap: var(--sp-4);
   margin: var(--sp-6) 0;
   max-width: 720px;
+  width: 100%;
 }
 
 .pricing-card {
+  min-width: 0;
   background: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
   border-radius: 16px;
@@ -371,6 +377,8 @@ main {
   display: inline-flex;
   align-items: center;
   gap: var(--sp-1);
+  justify-content: center;
+  max-width: 100%;
   padding: var(--sp-2) var(--sp-4);
   font-size: 18px;
   font-weight: 500;
@@ -467,10 +475,28 @@ footer a:hover {
   .hero {
     padding: var(--sp-6) 0 var(--sp-6);
   }
+  .hero-title {
+    font-size: 34px;
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-subhead {
+    font-size: 17px;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta {
+    width: min(100%, 320px);
+    padding: var(--sp-2) var(--sp-3);
+    font-size: 16px;
+  }
   main {
     padding: 0 var(--sp-3);
   }
   .features h2 {
+    font-size: 28px;
     margin-bottom: var(--sp-5);
   }
   .divider {
@@ -612,17 +638,14 @@ footer a:hover {
   justify-content: flex-start;
 }
 .page .nav-brand {
-  font-weight: 600;
-  font-size: 18px;
-  color: var(--text-primary);
-  text-decoration: none;
-  letter-spacing: normal;
+  flex: 0 0 auto;
 }
 .page-content {
   flex: 1;
+  width: 100%;
   max-width: 720px;
   margin: 0 auto;
-  padding: var(--sp-6) var(--sp-4);
+  padding: var(--sp-5) var(--sp-4) var(--sp-6);
   line-height: 1.7;
 }
 .page-content h1 {
@@ -670,4 +693,21 @@ footer a:hover {
 .footer .copyright {
   margin-top: var(--sp-2);
   opacity: 0.7;
+}
+
+@media (max-width: 600px) {
+  .page .nav {
+    padding: var(--sp-2) var(--sp-3);
+  }
+  .page-content {
+    padding: 40px var(--sp-3) var(--sp-6);
+  }
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: var(--sp-3);
+    margin: var(--sp-5) 0;
+  }
+  .pricing-card {
+    padding: var(--sp-4);
+  }
 }
