@@ -1,8 +1,8 @@
 # Terms of Service
 
-**Effective date:** 2026-05-13
+**Effective date:** 2026-05-16
 
-These Terms of Service ("Terms") govern your use of AnotherPlayer ("the Software"), provided by Binbox Games ("we", "us", "our"). By downloading or purchasing the Software, you agree to these Terms.
+These Terms of Service ("Terms") govern your use of AnotherPlayer ("the Software"), provided by Binbox Games ("we", "us", "our"). By downloading, installing, or using the Software, you agree to these Terms.
 
 ## 1. Acceptance
 
@@ -10,52 +10,62 @@ By downloading, installing, or using the Software, you agree to be bound by thes
 
 ## 2. License Grant
 
-We grant you a personal, non-exclusive, non-transferable, non-sublicensable license to use the Software, subject to your license type:
+We grant you a worldwide, royalty-free, non-exclusive, non-transferable, non-sublicensable license to install and use the Software at no cost, for any lawful purpose — including personal, freelance, studio, and commercial use.
 
-- **Free license** — for personal, non-commercial use by a single user.
-- **Commercial license ($120 USD, one-time, perpetual)** — for commercial use including studio, business, or freelance contexts.
+The Software is free for all users. There is no paid tier, license key, or registration required to use any v1 feature.
 
 ## 3. Restrictions
 
 You may not:
 
-- Use the Software in a manner that exceeds the scope of your license type (e.g., commercial use under a Free license).
-- Each Commercial license permits use on up to 5 devices per user. Activating on additional devices requires deactivating an existing device in Settings → My devices.
-- Share, redistribute, resell, sublicense, lease, or otherwise transfer your license key to any third party.
-- We may choose not to actively enforce license activation in all cases; however, this does not waive our rights to enforce against violations.
-- Reverse engineer, decompile, disassemble, or otherwise attempt to derive the source code of the Software, except to the extent expressly permitted by applicable law.
-- Use the Software for any unlawful purpose.
+- Share, redistribute, resell, sublicense, lease, mirror, or otherwise transfer the Software or any portion of it to any third party, whether for compensation or not, outside of the official download channel.
+- Reverse engineer, decompile, disassemble, or otherwise attempt to derive the source code, internal algorithms, or non-public design of the Software, except to the extent expressly permitted by applicable law.
+- Remove, alter, or obscure any copyright, trademark, attribution, or other proprietary notice contained in the Software.
+- Use the Software for any unlawful purpose or in any manner that violates applicable law.
 
-## 4. Intellectual Property
+Any delay or failure by Binbox Games to enforce a license restriction does not waive our right to enforce that restriction later.
 
-The Software, including all source code, design, content, and trademarks, is owned by Binbox Games and is protected by copyright, trademark, and other intellectual property laws.
+## 4. Donations (when available)
 
-## 5. Disclaimer of Warranties
+Once available, optional donations to support continued development of the Software will be processed by Paddle.com Market Ltd. as Merchant of Record. Paddle's buyer terms will govern donation payment processing, tax, invoices, and refunds.
 
-THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+Donations are voluntary contributions to development. They do not purchase a license, do not grant any additional rights beyond those granted in Section 2, and do not create any service-level commitment. AnotherPlayer remains fully free regardless of whether you donate.
 
-## 6. Limitation of Liability
+If you have not made a donation, Section 4 does not apply to you.
 
-TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, BINBOX GAMES SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOSS OF DATA, PROFITS, OR BUSINESS. OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT YOU PAID FOR THE SOFTWARE.
+## 5. Intellectual Property
 
-## 7. Termination
+The Software, including all source code, design, content, and trademarks, is owned by Binbox Games and is protected by copyright, trademark, and other intellectual property laws. No ownership is transferred to you by this license.
 
-We may terminate your license if you materially breach these Terms. Upon termination, you must cease all use of the Software and destroy all copies in your possession.
+## 6. Disclaimer of Warranties
 
-## 8. Governing Law
+THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, OR UNINTERRUPTED OR ERROR-FREE OPERATION.
+
+## 7. Limitation of Liability
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, BINBOX GAMES SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES, INCLUDING LOSS OF DATA, PROFITS, BUSINESS, GOODWILL, OR USE, ARISING FROM OR RELATED TO YOUR USE OF THE SOFTWARE. BECAUSE THE SOFTWARE IS PROVIDED FREE OF CHARGE, OUR TOTAL AGGREGATE LIABILITY TO YOU SHALL NOT EXCEED ONE U.S. DOLLAR (USD $1), OR THE AMOUNT OF ANY VOLUNTARY DONATION YOU MADE TO US IN THE TWELVE (12) MONTHS PRECEDING THE EVENT GIVING RISE TO LIABILITY, WHICHEVER IS GREATER.
+
+## 8. Termination
+
+These Terms remain in effect for as long as you use the Software. We may terminate your license if you materially breach these Terms — including, without limitation, Section 3 (Restrictions). Upon termination, you must cease all use of the Software and destroy all copies in your possession. Sections 5, 6, 7, 9, and 10 survive termination.
+
+## 9. Governing Law
 
 These Terms are governed by the laws of the Republic of Korea, without regard to its conflict-of-laws principles.
 
 **Nothing in this agreement affects your statutory consumer rights under your local law.** For users in the EU/EEA/UK, mandatory consumer protection laws of your country of residence apply where they provide stronger rights than these Terms.
 
-## 9. Dispute Resolution
+## 10. Dispute Resolution
 
 Any disputes arising from these Terms shall be subject to the exclusive jurisdiction of the courts of the Republic of Korea, except where mandatory consumer protection law of your country of residence provides otherwise.
 
-## 10. Modifications
+## 11. Modifications
 
-We may modify these Terms from time to time. We will notify you of material changes at least 30 days before they take effect by posting the updated Terms on this page and updating the effective date.
+We may modify these Terms from time to time. We will notify users of material changes by posting the updated Terms on this page and updating the effective date.
 
-## 11. Contact
+## 12. Contact
+
+- Product licensor and site operator: Binbox Games
+- Donation Merchant of Record (when donations launch): Paddle.com Market Ltd.
 
 For questions about these Terms, contact us at: <contact@binboxgames.com>

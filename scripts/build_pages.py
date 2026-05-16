@@ -36,10 +36,10 @@ ALLOWED_TAGS = [
 ]
 ALLOWED_ATTRIBUTES = {
     "*": ["class"],
-    "a": ["href", "title", "rel", "id", "data-os"],
-    "div": ["class", "id"],
+    "a": ["href", "title", "rel", "id", "data-os", "data-donation-tier", "aria-disabled"],
+    "div": ["class", "id", "aria-label"],
     "article": ["class"],
-    "span": ["class"],
+    "span": ["class", "aria-hidden"],
     "table": ["class"],
     "th": ["scope"],
 }

@@ -9,21 +9,22 @@ Landing page for **AnotherPlayer** — native sample browser for Mac and Windows
 - **Binary host**: Cloudflare R2 (`download.anotherplayer.com`)
 - **Build**: vanilla HTML/CSS/JS — no framework, no NPM, no runtime CDN
 - **Font**: Geist Sans (SIL Open Font License 1.1, self-hosted woff2)
-- **JS**: ~50 lines (OS auto-detect + CTA URL swap + commercial license link)
+- **JS**: OS auto-detect + CTA URL swap + `DONATION_ENABLED` feature flag (donation modal deferred until backend go-live)
 
 ## Security posture
 
 - No framework runtime (Next.js / React / Vue 의존성 0 → 관련 CVE 자동 회피)
 - No NPM packages (supply chain attack surface 0)
 - No external CDN runtime (Geist self-host, no Google Fonts runtime, no analytics)
-- CSP meta tag (`default-src 'self'`, only `api.binboxgames.com` allowed)
+- CSP meta tag (`default-src 'self'`, `script-src` allows `download.anotherplayer.com` release metadata, `connect-src` allows `api.binboxgames.com` for future donation flow)
+- `textContent` instead of `innerHTML` for all dynamic content (XSS-safe even if R2 release metadata is tampered)
 - Cloudflare proxy front (DDoS unlimited mitigation + WAF + Bot Fight Mode, free tier)
 - Referrer-Policy + Permissions-Policy meta tags (privacy)
 
 ## License model
 
-- **Personal use**: free forever
-- **Commercial use**: paid commercial license required (Resonic-style honor + light key activation, see M-6 spec)
+- **AnotherPlayer is free for everyone** — personal, freelance, studio, commercial. No license key, no registration, no paywall.
+- Optional donation checkout launches with the v1.0 GA release. Until then, the `/pricing` page renders 6 donation tier buttons in coming-soon (aria-disabled) state. See `script.js` `DONATION_ENABLED` flag for the swap point.
 - Contact: `contact@binboxgames.com`
 
 ## Copyright

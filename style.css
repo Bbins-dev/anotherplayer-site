@@ -503,120 +503,68 @@ footer a:hover {
   }
 }
 
-/* M-6b modal — Frappé palette 일관성 */
-#buy-modal {
-  border: none;
-  background: transparent;
-  padding: 0;
-  max-width: 460px;
-  width: 92%;
+/* Single freeware pricing card — center-justified, no 2-column grid. */
+.pricing-grid-single {
+  grid-template-columns: minmax(0, 420px);
+  justify-content: center;
 }
-#buy-modal::backdrop {
-  background: rgba(35, 38, 52, 0.78);
-  backdrop-filter: blur(4px);
-}
-.modal-card {
-  background: #292c3c;
-  color: #c6d0f5;
-  border: 1px solid #51576d;
+
+/* Donation tiers — rendered disabled until DONATION_ENABLED flips on
+   (see script.js). aria-disabled is the single source of disabled state
+   for both assistive tech and CSS — flip to remove and the buttons
+   become live with zero markup change. */
+.donate-section {
+  margin: var(--sp-5) 0;
+  padding: var(--sp-4);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
   border-radius: 12px;
-  padding: 24px 28px;
-  font-family: inherit;
 }
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-.modal-header h2 {
-  font-size: 18px;
-  margin: 0;
-  color: #f4b8e4;
-}
-.modal-close {
-  background: transparent;
-  border: none;
-  color: #c6d0f5;
-  font-size: 24px;
-  cursor: pointer;
-  padding: 4px 8px;
-}
-.step-indicator {
-  font-size: 12px;
-  color: #a5adce;
-  margin: 8px 0 16px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-.modal-step label {
-  display: block;
-  margin: 10px 0;
+.donate-status {
   font-size: 14px;
+  color: var(--text-subtle);
+  margin: 0 0 var(--sp-3);
+  text-align: center;
 }
-.modal-step input {
-  display: block;
-  width: 100%;
-  margin-top: 4px;
-  padding: 10px 12px;
-  background: #232634;
-  color: #c6d0f5;
-  border: 1px solid #51576d;
-  border-radius: 6px;
-  font: inherit;
-}
-.modal-step input:focus {
-  outline: 2px solid #f4b8e4;
-  outline-offset: 1px;
-}
-.modal-help {
-  font-size: 12px;
-  color: #a5adce;
-  margin: 8px 0;
-}
-.modal-error {
-  color: #e78284;
-  font-size: 13px;
-  min-height: 18px;
-  margin: 8px 0;
-}
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-top: 20px;
-}
-.modal-actions button {
-  padding: 9px 18px;
-  background: #232634;
-  color: #c6d0f5;
-  border: 1px solid #51576d;
-  border-radius: 6px;
-  font: inherit;
-  cursor: pointer;
-}
-.modal-actions button[data-action="send-otp"],
-.modal-actions button[data-action="verify-otp"],
-.modal-actions button[data-action="continue-checkout"] {
-  background: linear-gradient(90deg, #a6d189, #ef9f76);
-  color: #232634;
-  border-color: transparent;
+.donate-status strong {
+  color: var(--accent-hover);
   font-weight: 600;
 }
-.modal-actions button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.donate-tier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: var(--sp-1);
+  margin: var(--sp-3) 0;
 }
-#resend-btn {
-  display: block;
-  margin: 12px 0;
-  padding: 6px 12px;
-  background: transparent;
-  color: #a5adce;
-  border: 1px dashed #51576d;
-  border-radius: 4px;
-  font: inherit;
-  cursor: pointer;
+.page-content a.donate-tier {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-2);
+  background: var(--bg-base);
+  color: var(--text-faint);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: filter 200ms ease, transform 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+.page-content a.donate-tier[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.page-content a.donate-tier[aria-disabled="true"]:hover {
+  filter: none;
+  transform: none;
+  color: var(--text-faint);
+  border-color: var(--border-subtle);
+}
+.donate-note {
+  font-size: 12px;
+  color: var(--text-faint);
+  text-align: center;
+  margin: var(--sp-2) 0 0;
 }
 
 /* M-4b 4 페이지 공통 layout */

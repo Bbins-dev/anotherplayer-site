@@ -1,8 +1,8 @@
-// AnotherPlayer landing — OS auto-detect + CTA URL swap.
+// AnotherPlayer landing — OS auto-detect + CTA URL swap + (future) donation tier launch.
 // vanilla JS, framework 0, NPM 0. developed by external observation only.
 
 // Binary host = Cloudflare R2 (download.anotherplayer.com subdomain → R2 binding).
-// fallback 은 R2 latest.js 로딩 실패 시만 사용. release.yml 이 latest.js 를 갱신한다.
+// Fallback is used only when R2 latest.js fails to load. release.yml updates latest.js.
 const RELEASE_FALLBACK = {
   version: '1.0.6',
   macDmgUrl: 'https://download.anotherplayer.com/AnotherPlayer-1.0.6.dmg',
@@ -10,9 +10,25 @@ const RELEASE_FALLBACK = {
 };
 const DOWNLOAD_LATEST = 'https://download.anotherplayer.com/';
 
-// Commercial license backend = Cloudflare Workers (M-6 backend).
-// Modal 안 fetch 호출 진입점 기준 (B.5 state machine 에서 사용).
+// Backend API (Cloudflare Workers). Used by donation flow once enabled.
 const API_BASE = 'https://api.binboxgames.com';
+
+// ── Donation feature flag ───────────────────────────────────────────────────
+// v1 ships as freeware-only. Donation backend code is complete (Phase B —
+// donation_checkout.ts + issue.ts donation branch + DONATION_TIERS + D1 0004).
+// What's missing for go-live (external ops only, not code):
+//   1. Paddle dashboard: 6 donation products created → 6 price IDs received.
+//   2. Cloudflare secrets injected (PADDLE_API_KEY, PADDLE_WEBHOOK_SECRET,
+//      DONATION_PRICE_5USD / _10USD / _25USD / _50USD / _99USD / _CUSTOM).
+//   3. D1 migration 0004 deployed to production.
+//   4. Paddle webhook destination → POST /license/issue connected.
+//   5. Sandbox E2E test passes (donation → email receipt → app banner).
+// When all 5 done, flip DONATION_ENABLED to true. The pricing.md donation
+// tier anchors already carry data-donation-tier="5|10|25|50|99|custom" so the
+// click handler below (wireDonationTiers) wires up to the existing backend
+// /license/email/{send-otp,verify-otp}/donation/checkout flow with zero
+// markup change.
+const DONATION_ENABLED = false;
 
 function detectOS() {
   const platform = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '';
@@ -30,13 +46,15 @@ function applyReleaseMeta() {
   const release = currentRelease();
   const eyebrow = document.querySelector('.hero .eyebrow');
   if (eyebrow && release.version) {
-    eyebrow.innerHTML = `v${release.version} &middot; Free for personal use`;
+    // textContent + literal middot (U+00B7) — XSS-safe even if release.version
+    // is tampered with on the R2 bucket. Avoids innerHTML parsing.
+    eyebrow.textContent = `v${release.version} · Free for everyone`;
   }
 }
 
 // /pricing 의 Free Download CTA — OS auto-detect + label swap.
-// Hero CTA 는 static href="/pricing" + label "Download AnotherPlayer" 이라 JS 영향 X.
-// Label span 만 textContent 변경 (arrow icon 보존).
+// Hero CTA is static href="/pricing" + label "Download AnotherPlayer" so JS does not touch it.
+// Only the label span receives a textContent update (arrow icon preserved).
 function applyCTA(os) {
   const release = currentRelease();
   const freeCTA = document.getElementById('free-download-cta');
@@ -66,152 +84,6 @@ function loadReleaseMeta() {
   document.head.appendChild(script);
 }
 
-// Buy modal — nav-buy click 또는 ?buy=1 query 로 진입.
-// 상태 머신 + fetch wrapper 는 B.5 에서 구현. 본 task = open trigger 만.
-const buyModal = document.getElementById('buy-modal');
-
-function openBuyModal() {
-  if (!buyModal) return;
-  resetModalToStep(1);
-  buyModal.showModal();
-}
-
-function closeBuyModal() {
-  if (!buyModal) return;
-  buyModal.close();
-}
-
-// Modal state machine — B.5.
-// 단일 buyState 객체 = 진행 중 email + sessionId + resend cooldown timer 기준.
-// fetch wrapper postJson = credentials:'omit' (쿠키 0, 모든 인증은 명시적 sessionId payload).
-const buyState = {
-  email: '',
-  sessionId: '',
-  resendTimer: null,
-};
-
-function resetModalToStep(n) {
-  buyState.email = '';
-  buyState.sessionId = '';
-  const email1 = document.getElementById('email-1');
-  const email2 = document.getElementById('email-2');
-  const otpCode = document.getElementById('otp-code');
-  if (email1) email1.value = '';
-  if (email2) email2.value = '';
-  if (otpCode) otpCode.value = '';
-  setError(1, '');
-  setError(2, '');
-  setError(3, '');
-  showStep(n);
-}
-
-function showStep(n) {
-  if (!buyModal) return;
-  for (let i = 1; i <= 3; i++) {
-    const sec = buyModal.querySelector(`.modal-step[data-step="${i}"]`);
-    if (sec) sec.hidden = i !== n;
-  }
-}
-
-function setError(step, msg) {
-  const target = document.getElementById(`step${step}-error`);
-  if (target) target.textContent = msg;
-}
-
-async function postJson(path, body) {
-  const r = await fetch(`${API_BASE}${path}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'omit',
-    body: JSON.stringify(body),
-  });
-  let data = null;
-  try { data = await r.json(); } catch (_) { /* swallow */ }
-  return { status: r.status, data };
-}
-
-function startResendCooldown() {
-  const btn = document.getElementById('resend-btn');
-  let remaining = 30;
-  btn.disabled = true;
-  btn.textContent = `Resend code (${remaining}s)`;
-  if (buyState.resendTimer) clearInterval(buyState.resendTimer);
-  buyState.resendTimer = setInterval(() => {
-    remaining -= 1;
-    if (remaining <= 0) {
-      clearInterval(buyState.resendTimer);
-      buyState.resendTimer = null;
-      btn.disabled = false;
-      btn.textContent = 'Resend code';
-    } else {
-      btn.textContent = `Resend code (${remaining}s)`;
-    }
-  }, 1000);
-}
-
-function wireBuyModal() {
-  // [Buy commercial license] CTA on /pricing — primary modal trigger.
-  // Anchor child onclick is stripped by sanitizer; div-level listener catches bubble.
-  const buyCTA = document.getElementById('buy-commercial-cta');
-  if (buyCTA) {
-    buyCTA.addEventListener('click', (e) => {
-      e.preventDefault();
-      openBuyModal();
-    });
-  }
-  // ?buy=1 query string → auto-open (외부 링크 진입점, 결제 redirect 복귀 등).
-  if (new URLSearchParams(window.location.search).get('buy') === '1') {
-    openBuyModal();
-  }
-
-  if (!buyModal) return;
-  buyModal.addEventListener('click', async (e) => {
-    const action = e.target.dataset?.action;
-    if (!action) return;
-
-    if (action === 'close') {
-      closeBuyModal();
-    } else if (action === 'send-otp' || action === 'resend-otp') {
-      setError(1, '');
-      const e1 = document.getElementById('email-1').value.trim();
-      const e2 = document.getElementById('email-2').value.trim();
-      if (!/^\S+@\S+\.\S+$/.test(e1)) { setError(1, 'Invalid email format'); return; }
-      if (e1 !== e2) { setError(1, "Emails don't match"); return; }
-      buyState.email = e1;
-      const r = await postJson('/license/email/send-otp', { email: e1 });
-      if (r.status === 429) { setError(1, 'Too many requests — please wait and try again.'); return; }
-      if (r.status >= 400) { setError(1, 'Could not send code. Try again.'); return; }
-      document.getElementById('email-display').textContent = e1;
-      showStep(2);
-      startResendCooldown();
-    } else if (action === 'verify-otp') {
-      setError(2, '');
-      const code = document.getElementById('otp-code').value.trim();
-      if (!/^\d{6}$/.test(code)) { setError(2, 'Enter the 6-digit code from the email'); return; }
-      const r = await postJson('/license/email/verify-otp', { email: buyState.email, code });
-      if (r.status === 400) {
-        const map = { invalid_code: 'Incorrect code', expired: 'Code expired — request a new one', too_many_attempts: 'Too many attempts — request a new code' };
-        setError(2, map[r.data?.error] ?? 'Invalid code');
-        return;
-      }
-      if (r.status !== 200 || !r.data?.sessionId) { setError(2, 'Verification failed'); return; }
-      buyState.sessionId = r.data.sessionId;
-      document.getElementById('verified-email-display').textContent = buyState.email;
-      showStep(3);
-    } else if (action === 'continue-checkout') {
-      setError(3, '');
-      const r = await postJson('/license/email/checkout', { sessionId: buyState.sessionId });
-      if (r.status !== 200 || !r.data?.checkoutUrl) { setError(3, 'Could not start checkout — please try again from Step 1'); return; }
-      window.open(r.data.checkoutUrl, '_blank', 'noopener,noreferrer');
-      closeBuyModal();
-    } else if (action === 'back-to-step1') {
-      showStep(1);
-    } else if (action === 'back-to-step2') {
-      showStep(2);
-    }
-  });
-}
-
 function wireOSToggle() {
   const links = document.querySelectorAll('.toggle-link');
   if (!links.length) return;
@@ -229,8 +101,41 @@ function wireOSToggle() {
   setActive(detectOS());
 }
 
+// ── Donation tier click handler (active only when DONATION_ENABLED) ─────────
+// Mirrors the buy-modal state machine pattern: email → OTP → /donation/checkout
+// with {sessionId, tier} → Paddle hosted checkout URL. The modal markup +
+// state machine implementation is deliberately deferred until the 5 go-live
+// external ops above complete; this handler is the wire-up entry point that
+// will open that modal.
+function wireDonationTiers() {
+  const tiers = document.querySelectorAll('.donate-tier');
+  if (!tiers.length) return;
+  tiers.forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!DONATION_ENABLED) {
+        // Coming-soon state: aria-disabled + cursor:not-allowed already signal this.
+        // No further action; pricing.md `.donate-status` paragraph explains the timeline.
+        return;
+      }
+      openDonateModal(el.dataset.donationTier);
+    });
+  });
+}
+
+// openDonateModal — opens the donation OTP + Paddle checkout flow.
+// Implementation deferred until DONATION_ENABLED flips to true. When implementing:
+//   - Mirror the previous commercial buy-modal state machine (3 steps: email → OTP → checkout)
+//   - POST flow: /license/email/send-otp → /license/email/verify-otp → /license/donation/checkout {sessionId, tier}
+//   - Returns checkoutUrl; window.open(checkoutUrl) in new tab.
+//   - Reference: backend/license/src/handlers/donation_checkout.ts (already implemented + tested).
+function openDonateModal(_tier) {
+  // Intentionally a no-op until DONATION_ENABLED + modal markup land together.
+  // Friends visiting today should never reach this path (button is aria-disabled).
+}
+
 applyReleaseMeta();
 applyCTA(detectOS());
 wireOSToggle();
-wireBuyModal();
+wireDonationTiers();
 loadReleaseMeta();

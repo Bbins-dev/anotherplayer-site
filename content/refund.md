@@ -1,41 +1,42 @@
 # Refund Policy
 
-**Effective date:** 2026-05-14
+**Effective date:** 2026-05-16
 
-This Refund Policy describes refund eligibility for AnotherPlayer Commercial licenses purchased via Paddle, our Merchant of Record.
+## 1. AnotherPlayer is free
 
-## 1. Refund eligibility
+AnotherPlayer is free for all users — personal, freelance, studio, and commercial. There is no purchase to refund.
 
-We offer a **14-day unconditional refund** to every customer, regardless of region. Within 14 days of your purchase date, you may request a full refund for any reason — no questions asked, no jurisdiction differences.
+If you downloaded the Software and it does not work for you, simply stop using it; nothing was charged.
 
-Where local consumer-protection law grants stronger statutory rights (for example, the EU/EEA/UK 14-day cooling-off period under the Consumer Rights Directive, or the Republic of Korea unconditional cancel right under the E-commerce Consumer Protection Act, Article 17), those rights are preserved in full. Our policy meets or exceeds the strongest mandatory standard in each region.
+## 2. Donations (when available)
 
-## 2. Refund process
+Once optional donation checkout launches, donations will be processed by Paddle.com Market Ltd. as Merchant of Record.
 
-All refunds are processed by Paddle as our Merchant of Record. To request a refund:
+Donations are voluntary contributions to development of the Software, not a purchase of a license or a service. As gifts, donations are not generally refundable once processed. **However:**
 
-- Email <contact@binboxgames.com> with your order ID, OR
+- Where local consumer-protection law grants stronger statutory cancellation or withdrawal rights, those rights apply in full. We do not attempt to override mandatory law.
+- If you donated and believe the transaction was unauthorized (for example, your payment method was used without your consent), contact us as soon as possible and we will work with Paddle to investigate and, if appropriate, return the funds.
+
+To request a donation refund or report an unauthorized donation:
+
+- Email <contact@binboxgames.com> with your donation order ID, OR
 - Submit a refund request directly via Paddle's buyer support.
 
-Refunds typically appear on your original payment method within 5–10 business days.
+This section applies only once donation checkout has launched. If you have not made a donation, Section 2 does not apply to you.
 
-## 3. Exceptions
+## 3. Paddle as Merchant of Record (donations only)
 
-Refunds will generally not be granted for:
-
-- Purchases made as gifts to a third party (refund must be requested by the original purchaser).
-- Requests made after the applicable refund window.
-- Purchases where fraudulent activity is suspected.
-- Cases where a chargeback has already been initiated with your bank or card issuer.
-
-## 4. Paddle as Merchant of Record
-
-Paddle.com Market Ltd. acts as the Merchant of Record for all AnotherPlayer purchases. This means Paddle is the seller from a regulatory and tax perspective, handles all payment processing, refunds, and chargebacks, and is responsible for VAT and sales tax compliance in applicable jurisdictions.
+When donation checkout launches, Paddle.com Market Ltd. will act as the Merchant of Record for AnotherPlayer donations. This means Paddle handles payment processing, invoices, refunds, chargebacks, and VAT or sales tax compliance in applicable jurisdictions. Binbox Games remains the software author and site operator.
 
 For Paddle's buyer terms, see: <https://www.paddle.com/legal/buyer-terms>.
 
-## 5. Consumer protection
+## 4. Consumer protection
 
 Your local statutory consumer rights are preserved regardless of this Refund Policy. If a mandatory consumer protection law in your country of residence provides stronger rights, those rights apply.
 
-For questions about refunds, contact <contact@binboxgames.com>.
+## 5. Business information
+
+- Product author and site operator: Binbox Games
+- Donation Merchant of Record (when donations launch): Paddle.com Market Ltd.
+
+For questions about this Refund Policy, contact <contact@binboxgames.com>.
