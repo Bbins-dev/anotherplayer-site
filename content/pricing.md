@@ -28,7 +28,7 @@ No license key. No registration. No paywall.
 
 ## Support development
 
-If AnotherPlayer is useful to you, you can support continued development with an optional one-time donation. Donations are not required to use any feature.
+If AnotherPlayer is useful to you, you can support continued development with an optional donation. Donations are not required to use any feature. Every donor's checkout email is remembered with deep gratitude — your support directly enables continued work on AnotherPlayer.
 
 <div class="donate-section">
   <p class="donate-status"><strong>Coming soon</strong> — donation checkout launches alongside the v1.0 General Availability release.</p>
@@ -51,7 +51,7 @@ Yes. v1 is free for every user and every use case — personal, freelance, studi
 
 ### Will it stay free?
 
-Yes. v1 stays free for everyone, permanently. A future v2 may add a paid Pro tier with additional features (auto-tagging, advanced metering, DSP, marketplace) — but all v1 features will keep working in v2 without any payment.
+Yes. v1 stays free for everyone, permanently.
 
 ### How can I support development?
 

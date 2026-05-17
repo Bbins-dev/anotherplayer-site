@@ -42,6 +42,10 @@ ALLOWED_ATTRIBUTES = {
     "span": ["class", "aria-hidden"],
     "table": ["class"],
     "th": ["scope"],
+    # toc extension 의 h2/h3/h4 auto-id 보존 — nav anchor scroll (e.g., /pricing#support-development) 활성.
+    "h2": ["id"],
+    "h3": ["id"],
+    "h4": ["id"],
 }
 ALLOWED_PROTOCOLS = ["https", "mailto"]
 
