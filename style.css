@@ -509,26 +509,13 @@ footer a:hover {
   justify-content: center;
 }
 
-/* Donation tiers — rendered disabled until DONATION_ENABLED flips on
-   (see script.js). aria-disabled is the single source of disabled state
-   for both assistive tech and CSS — flip to remove and the buttons
-   become live with zero markup change. */
+/* Donation tiers — live buttons. */
 .donate-section {
   margin: var(--sp-5) 0;
   padding: var(--sp-4);
   background: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
-}
-.donate-status {
-  font-size: 14px;
-  color: var(--text-subtle);
-  margin: 0 0 var(--sp-3);
-  text-align: center;
-}
-.donate-status strong {
-  color: var(--accent-hover);
-  font-weight: 600;
 }
 .donate-tier-grid {
   display: grid;
@@ -542,7 +529,7 @@ footer a:hover {
   justify-content: center;
   padding: var(--sp-2);
   background: var(--bg-base);
-  color: var(--text-faint);
+  color: var(--text-primary);
   border: 1px solid var(--border-subtle);
   border-radius: 8px;
   text-decoration: none;
@@ -550,21 +537,71 @@ footer a:hover {
   font-size: 15px;
   transition: filter 200ms ease, transform 200ms ease, color 200ms ease, border-color 200ms ease;
 }
-.page-content a.donate-tier[aria-disabled="true"] {
-  cursor: not-allowed;
-  opacity: 0.55;
-}
-.page-content a.donate-tier[aria-disabled="true"]:hover {
-  filter: none;
-  transform: none;
-  color: var(--text-faint);
-  border-color: var(--border-subtle);
+.page-content a.donate-tier:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+  border-color: var(--accent-hover);
 }
 .donate-note {
   font-size: 12px;
   color: var(--text-faint);
   text-align: center;
   margin: var(--sp-2) 0 0;
+}
+.donate-custom {
+  display: flex;
+  gap: var(--sp-2);
+  margin: var(--sp-3) 0 0;
+}
+.donate-custom-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: var(--sp-2);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+}
+.donate-custom-input::placeholder {
+  color: var(--text-faint);
+}
+.donate-custom-go {
+  flex: 0 0 auto;
+  padding: var(--sp-2) var(--sp-4);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: filter 200ms ease, border-color 200ms ease;
+}
+.donate-custom-go:hover {
+  filter: brightness(1.15);
+  border-color: var(--accent-hover);
+}
+.donate-custom-go:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+.donate-custom-input:focus-visible,
+.donate-custom-go:focus-visible {
+  outline: 2px solid var(--accent-grad-end);
+  outline-offset: 4px;
+}
+
+/* pricing Free 카드 — 현재 빌드 표시 (작고 옅게). */
+.pricing-version {
+  font-size: 12px;
+  color: var(--text-faint);
+  margin: 0;
+}
+.pricing-tagline strong {
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 /* M-4b 4 페이지 공통 layout */
