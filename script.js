@@ -37,10 +37,6 @@ const DONATION_MAX_USD = 9999;
 
 let paddleReady = false;
 
-// Task 9 가 wireDonationTiers 를 교체하면서 제거할 tombstone — 그때까지 기존
-// wireDonationTiers 의 DONATION_ENABLED 참조가 ReferenceError 를 던지지 않게 유지한다.
-const DONATION_ENABLED = false;
-
 function detectOS() {
   const platform = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '';
   const ua = navigator.userAgent || '';
@@ -131,41 +127,107 @@ function loadPaddle() {
   document.head.appendChild(s);
 }
 
-// ── Donation tier click handler (active only when DONATION_ENABLED) ─────────
-// Mirrors the buy-modal state machine pattern: email → OTP → /donation/checkout
-// with {sessionId, tier} → Paddle hosted checkout URL. The modal markup +
-// state machine implementation is deliberately deferred until the 5 go-live
-// external ops above complete; this handler is the wire-up entry point that
-// will open that modal.
-function wireDonationTiers() {
-  const tiers = document.querySelectorAll('.donate-tier');
-  if (!tiers.length) return;
-  tiers.forEach((el) => {
-    el.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (!DONATION_ENABLED) {
-        // Coming-soon state: aria-disabled + cursor:not-allowed already signal this.
-        // No further action; pricing.md `.donate-status` paragraph explains the timeline.
-        return;
-      }
-      openDonateModal(el.dataset.donationTier);
-    });
+// ── Donation checkout ───────────────────────────────────────────────────────
+function openFixedCheckout(tier) {
+  const priceId = DONATION_TIERS[tier];
+  if (!priceId || !paddleReady) return;
+  Paddle.Checkout.open({
+    items: [{ priceId, quantity: 1 }],
+    customData: { donation: true, tier },
   });
 }
 
-// openDonateModal — opens the donation OTP + Paddle checkout flow.
-// Implementation deferred until DONATION_ENABLED flips to true. When implementing:
-//   - Mirror the previous commercial buy-modal state machine (3 steps: email → OTP → checkout)
-//   - POST flow: /license/email/send-otp → /license/email/verify-otp → /license/donation/checkout {sessionId, tier}
-//   - Returns checkoutUrl; window.open(checkoutUrl) in new tab.
-//   - Reference: backend/license/src/handlers/donation_checkout.ts (already implemented + tested).
-function openDonateModal(_tier) {
-  // Intentionally a no-op until DONATION_ENABLED + modal markup land together.
-  // Friends visiting today should never reach this path (button is aria-disabled).
+// custom 금액 — backend 가 non-catalog draft transaction 을 만들고 transactionId 반환.
+async function openCustomCheckout(amountUsd) {
+  const amountCents = Math.round(amountUsd * 100);
+  let res;
+  try {
+    res = await fetch(API_BASE + '/license/donation/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amountCents }),
+    });
+  } catch {
+    return false;
+  }
+  if (!res.ok) return false;
+  const data = await res.json().catch(() => null);
+  if (!data || !data.transactionId || !paddleReady) return false;
+  Paddle.Checkout.open({ transactionId: data.transactionId });
+  return true;
+}
+
+// donation tier 버튼 wiring. custom 금액 입력 UI 는 JS 가 DOM API 로 생성한다 —
+// build_pages.py 가 <input> 태그를 strip 하므로 markdown 에 둘 수 없고,
+// innerHTML 대신 createElement 를 쓴다 (기존 script.js 의 XSS-safe 스타일).
+function wireDonationTiers() {
+  const grid = document.querySelector('.donate-tier-grid');
+  if (!grid) return;
+
+  const customBox = document.createElement('div');
+  customBox.className = 'donate-custom';
+  customBox.hidden = true;
+
+  const input = document.createElement('input');
+  input.type = 'number';
+  input.className = 'donate-custom-input';
+  input.min = String(DONATION_MIN_USD);
+  input.max = String(DONATION_MAX_USD);
+  input.step = '1';
+  input.placeholder = 'Amount (USD)';
+  input.setAttribute('aria-label', 'Custom donation amount in US dollars');
+
+  const goBtn = document.createElement('button');
+  goBtn.type = 'button';
+  goBtn.className = 'donate-custom-go';
+  goBtn.textContent = 'Donate';
+
+  customBox.append(input, goBtn);
+  grid.insertAdjacentElement('afterend', customBox);
+
+  grid.querySelectorAll('.donate-tier').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const tier = el.dataset.donationTier;
+      if (tier === 'custom') {
+        customBox.hidden = !customBox.hidden;
+        if (!customBox.hidden) input.focus();
+      } else {
+        openFixedCheckout(tier);
+      }
+    });
+  });
+
+  goBtn.addEventListener('click', () => {
+    // Paddle.js 아직 로드 전이면 backend 왕복을 낭비하지 않고 즉시 안내.
+    if (!paddleReady) {
+      input.setCustomValidity('Payment is still loading — please try again in a moment.');
+      input.reportValidity();
+      return;
+    }
+    const amount = Number(input.value);
+    if (!Number.isFinite(amount) || amount < DONATION_MIN_USD || amount > DONATION_MAX_USD) {
+      input.setCustomValidity(`Enter an amount between $${DONATION_MIN_USD} and $${DONATION_MAX_USD}.`);
+      input.reportValidity();
+      return;
+    }
+    input.setCustomValidity('');
+    goBtn.disabled = true;
+    openCustomCheckout(amount)
+      .then((ok) => {
+        if (!ok) {
+          // checkout 생성 실패 — silent fail 금지, 사용자에게 안내.
+          input.setCustomValidity('Could not start checkout — please try again.');
+          input.reportValidity();
+        }
+      })
+      .finally(() => { goBtn.disabled = false; });
+  });
 }
 
 applyReleaseMeta();
 applyCTA(detectOS());
 wireOSToggle();
+loadPaddle();
 wireDonationTiers();
 loadReleaseMeta();
