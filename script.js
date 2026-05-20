@@ -13,21 +13,32 @@ const DOWNLOAD_LATEST = 'https://download.anotherplayer.com/';
 // Backend API (Cloudflare Workers). Used by donation flow once enabled.
 const API_BASE = 'https://api.binboxgames.com';
 
-// ── Donation feature flag ───────────────────────────────────────────────────
-// v1 ships as freeware-only. Donation backend code is complete (Phase B —
-// donation_checkout.ts + issue.ts donation branch + DONATION_TIERS + D1 0004).
-// What's missing for go-live (external ops only, not code):
-//   1. Paddle dashboard: 6 donation products created → 6 price IDs received.
-//   2. Cloudflare secrets injected (PADDLE_API_KEY, PADDLE_WEBHOOK_SECRET,
-//      DONATION_PRICE_5USD / _10USD / _25USD / _50USD / _99USD / _CUSTOM).
-//   3. D1 migration 0004 deployed to production.
-//   4. Paddle webhook destination → POST /license/issue connected.
-//   5. Sandbox E2E test passes (donation → email receipt → app banner).
-// When all 5 done, flip DONATION_ENABLED to true. The pricing.md donation
-// tier anchors already carry data-donation-tier="5|10|25|50|99|custom" so the
-// click handler below (wireDonationTiers) wires up to the existing backend
-// /license/email/{send-otp,verify-otp}/donation/checkout flow with zero
-// markup change.
+// ── Donation (Paddle.js) ────────────────────────────────────────────────────
+// Fixed tiers ($5~$199): client-side Paddle.Checkout.open({ items: [{ priceId }] }).
+// Custom tier: POST /license/donation/checkout → { transactionId } →
+//   Paddle.Checkout.open({ transactionId }).
+// Paddle.js client-side token is public-by-design (authenticates the SDK only).
+//
+// SANDBOX → PRODUCTION: before go-live, set PADDLE_ENVIRONMENT='production',
+// replace PADDLE_CLIENT_TOKEN with the production token, and replace each
+// DONATION_TIERS price ID with the production catalog price ID.
+const PADDLE_ENVIRONMENT = 'sandbox';
+const PADDLE_CLIENT_TOKEN = 'REPLACE_WITH_PADDLE_CLIENT_TOKEN';
+const DONATION_TIERS = {
+  '5': 'pri_REPLACE_5',
+  '10': 'pri_REPLACE_10',
+  '25': 'pri_REPLACE_25',
+  '50': 'pri_REPLACE_50',
+  '99': 'pri_REPLACE_99',
+  '199': 'pri_REPLACE_199',
+};
+const DONATION_MIN_USD = 1;
+const DONATION_MAX_USD = 9999;
+
+let paddleReady = false;
+
+// Task 9 가 wireDonationTiers 를 교체하면서 제거할 tombstone — 그때까지 기존
+// wireDonationTiers 의 DONATION_ENABLED 참조가 ReferenceError 를 던지지 않게 유지한다.
 const DONATION_ENABLED = false;
 
 function detectOS() {
@@ -49,6 +60,11 @@ function applyReleaseMeta() {
     // textContent + literal middot (U+00B7) — XSS-safe even if release.version
     // is tampered with on the R2 bucket. Avoids innerHTML parsing.
     eyebrow.textContent = `v${release.version} · Free for everyone`;
+  }
+  // pricing Free 카드의 현재 빌드 표시 — 랜딩 hero 와 같은 R2 latest.js 소스.
+  const versionNum = document.querySelector('.pricing-version-num');
+  if (versionNum && release.version) {
+    versionNum.textContent = release.version;
   }
 }
 
@@ -99,6 +115,20 @@ function wireOSToggle() {
     });
   });
   setActive(detectOS());
+}
+
+// Paddle.js 는 donation 그리드가 있는 페이지 (pricing) 에서만 로드한다.
+function loadPaddle() {
+  if (!document.querySelector('.donate-tier-grid')) return;
+  const s = document.createElement('script');
+  s.src = 'https://cdn.paddle.com/paddle/v2/paddle.js';
+  s.async = true;
+  s.onload = () => {
+    if (PADDLE_ENVIRONMENT === 'sandbox') Paddle.Environment.set('sandbox');
+    Paddle.Initialize({ token: PADDLE_CLIENT_TOKEN });
+    paddleReady = true;
+  };
+  document.head.appendChild(s);
 }
 
 // ── Donation tier click handler (active only when DONATION_ENABLED) ─────────
