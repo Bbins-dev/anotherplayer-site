@@ -1,6 +1,6 @@
 # Terms of Service
 
-**Effective date:** 2026-05-16
+**Effective date:** 2026-05-20
 
 These Terms of Service ("Terms") govern your use of AnotherPlayer ("the Software"), provided by Binbox Games ("we", "us", "our"). By downloading, installing, or using the Software, you agree to these Terms.
 
@@ -36,6 +36,8 @@ If you have not made a donation, Section 4 does not apply to you.
 ## 5. Intellectual Property
 
 The Software, including all source code, design, content, and trademarks, is owned by Binbox Games and is protected by copyright, trademark, and other intellectual property laws. No ownership is transferred to you by this license.
+
+The Software incorporates third-party open-source components, each governed by its own license. In particular, audio file format conversion is performed by a bundled build of FFmpeg (<https://ffmpeg.org>), licensed under the GNU Lesser General Public License version 2.1 or later (LGPL-2.1-or-later). The bundled FFmpeg is built with the --disable-gpl and --disable-nonfree options (an LGPL-only configuration). The full LGPL license text and build provenance are distributed with the Software under the licenses/ffmpeg directory, and the corresponding source code is available at <https://ffmpeg.org/releases/>. FFmpeg runs as a separate subprocess and is not linked into the Software. AnotherPlayer is not affiliated with, nor endorsed by, the FFmpeg project.
 
 ## 6. Disclaimer of Warranties
 
