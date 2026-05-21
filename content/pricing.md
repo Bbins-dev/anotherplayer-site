@@ -35,10 +35,11 @@ If AnotherPlayer is useful to you, you can support continued development with an
   <div class="donate-tier-grid" aria-label="Donation tiers">
     <a class="donate-tier" data-donation-tier="5" href="#">$5</a>
     <a class="donate-tier" data-donation-tier="10" href="#">$10</a>
+    <a class="donate-tier" data-donation-tier="15" href="#">$15</a>
     <a class="donate-tier" data-donation-tier="25" href="#">$25</a>
     <a class="donate-tier" data-donation-tier="50" href="#">$50</a>
-    <a class="donate-tier" data-donation-tier="99" href="#">$99</a>
-    <a class="donate-tier" data-donation-tier="199" href="#">$199</a>
+    <a class="donate-tier" data-donation-tier="100" href="#">$100</a>
+    <a class="donate-tier" data-donation-tier="200" href="#">$200</a>
     <a class="donate-tier" data-donation-tier="custom" href="#">Custom</a>
   </div>
   <p class="donate-note">100% optional. AnotherPlayer remains fully free regardless. Amounts shown are before tax; Paddle adds applicable tax at checkout.</p>

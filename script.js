@@ -14,7 +14,7 @@ const DOWNLOAD_LATEST = 'https://download.anotherplayer.com/';
 const API_BASE = 'https://api.binboxgames.com';
 
 // ── Donation (Paddle.js) ────────────────────────────────────────────────────
-// Fixed tiers ($5~$199): client-side Paddle.Checkout.open({ items: [{ priceId }] }).
+// Fixed tiers ($5~$200): client-side Paddle.Checkout.open({ items: [{ priceId }] }).
 // Custom tier: POST /license/donation/checkout → { transactionId } →
 //   Paddle.Checkout.open({ transactionId }).
 // Paddle.js client-side token is public-by-design (authenticates the SDK only).
@@ -27,10 +27,11 @@ const PADDLE_CLIENT_TOKEN = 'REPLACE_WITH_PADDLE_CLIENT_TOKEN';
 const DONATION_TIERS = {
   '5': 'pri_REPLACE_5',
   '10': 'pri_REPLACE_10',
+  '15': 'pri_REPLACE_15',
   '25': 'pri_REPLACE_25',
   '50': 'pri_REPLACE_50',
-  '99': 'pri_REPLACE_99',
-  '199': 'pri_REPLACE_199',
+  '100': 'pri_REPLACE_100',
+  '200': 'pri_REPLACE_200',
 };
 const DONATION_MIN_USD = 1;
 const DONATION_MAX_USD = 9999;
