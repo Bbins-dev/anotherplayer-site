@@ -553,6 +553,11 @@ footer a:hover {
   gap: var(--sp-2);
   margin: var(--sp-3) 0 0;
 }
+/* hidden 속성 존중 — Custom 선택 시에만 표시. .donate-custom 의 display:flex 가
+   UA 기본 [hidden]{display:none} 을 덮으므로 명시 규칙이 필요하다. */
+.donate-custom[hidden] {
+  display: none;
+}
 .donate-custom-input {
   flex: 1 1 auto;
   min-width: 0;

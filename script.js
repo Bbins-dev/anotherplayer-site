@@ -10,7 +10,7 @@ const RELEASE_FALLBACK = {
 };
 const DOWNLOAD_LATEST = 'https://download.anotherplayer.com/';
 
-// Backend API (Cloudflare Workers). Used by donation flow once enabled.
+// Backend API (Cloudflare Workers). Used by the custom-amount donation flow.
 const API_BASE = 'https://api.binboxgames.com';
 
 // ── Donation (Paddle.js) ────────────────────────────────────────────────────
@@ -19,19 +19,19 @@ const API_BASE = 'https://api.binboxgames.com';
 //   Paddle.Checkout.open({ transactionId }).
 // Paddle.js client-side token is public-by-design (authenticates the SDK only).
 //
-// SANDBOX → PRODUCTION: before go-live, set PADDLE_ENVIRONMENT='production',
-// replace PADDLE_CLIENT_TOKEN with the production token, and replace each
-// DONATION_TIERS price ID with the production catalog price ID.
-const PADDLE_ENVIRONMENT = 'sandbox';
-const PADDLE_CLIENT_TOKEN = 'REPLACE_WITH_PADDLE_CLIENT_TOKEN';
+// Production (live) values — set for the v1.0.18 launch (2026-05-21). To test
+// against the sandbox, set PADDLE_ENVIRONMENT='sandbox' and swap the token +
+// DONATION_TIERS price IDs back to the sandbox catalog.
+const PADDLE_ENVIRONMENT = 'production';
+const PADDLE_CLIENT_TOKEN = 'live_1dfb738dd506c9ad43246b43fec';
 const DONATION_TIERS = {
-  '5': 'pri_REPLACE_5',
-  '10': 'pri_REPLACE_10',
-  '15': 'pri_REPLACE_15',
-  '25': 'pri_REPLACE_25',
-  '50': 'pri_REPLACE_50',
-  '100': 'pri_REPLACE_100',
-  '200': 'pri_REPLACE_200',
+  '5': 'pri_01ks4j9y2svc1hsnk99dbvktm7',
+  '10': 'pri_01ks4j9yc50vfymarhcy29q402',
+  '15': 'pri_01ks4j9yrfk3zcyrx2mrmmwncx',
+  '25': 'pri_01ks4j9zbn49mr1h2w3yh39hga',
+  '50': 'pri_01ks4j9zysck8z05qedp005gem',
+  '100': 'pri_01ks4ja0v6xzrf4wgcdngyxfgt',
+  '200': 'pri_01ks4ja1f70tpn3ebt3t0d8g9h',
 };
 const DONATION_MIN_USD = 1;
 const DONATION_MAX_USD = 9999;
@@ -194,6 +194,8 @@ function wireDonationTiers() {
         customBox.hidden = !customBox.hidden;
         if (!customBox.hidden) input.focus();
       } else {
+        // 고정 tier 선택 시 custom 입력란 숨김 — custom 상태에서만 보이도록.
+        customBox.hidden = true;
         openFixedCheckout(tier);
       }
     });
