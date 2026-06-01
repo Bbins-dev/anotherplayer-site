@@ -8,7 +8,7 @@ No license key. No registration. No paywall.
   <article class="pricing-card pricing-card-featured">
     <h2 class="pricing-name">V1</h2>
     <p class="pricing-tagline"><strong>v1</strong> · free forever</p>
-    <p class="pricing-version">currently <span class="pricing-version-num">1.0.17</span></p>
+    <p class="pricing-version">currently <span class="pricing-version-num">1.0.28</span></p>
     <p class="pricing-price"><span class="amount">$0</span></p>
     <a class="pricing-cta pricing-cta-primary" id="free-download-cta" href="https://download.anotherplayer.com/"><span class="cta-arrow" aria-hidden="true">↓</span> <span class="cta-label">Download</span></a>
     <p class="pricing-os-toggle">
@@ -29,7 +29,9 @@ No license key. No registration. No paywall.
 
 ## Support development
 
-If AnotherPlayer is useful to you, you can support continued development with an optional donation. Donations are not required to use any feature. Every donor's checkout email is remembered with deep gratitude — your support directly enables continued work on AnotherPlayer.
+AnotherPlayer v1 is free for everyone, and it stays free whether you ever donate or not — nothing here is required to use any feature.
+
+But if it's found a place in your daily workflow and you'd like to chip in, it genuinely means a lot to me. I read every donation that comes in, and I keep every donor's email. I can't promise anything in return — so let me put it in writing instead: **I won't forget the people who backed this early.** If I'm ever in a position to give something back, in whatever form that ends up taking, I'll do my best to. Until then you have my honest, lasting gratitude — and *that* I can promise.
 
 <div class="donate-section">
   <div class="donate-tier-grid" aria-label="Donation tiers">
