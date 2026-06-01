@@ -10,9 +10,9 @@ By downloading, installing, or using the Software, you agree to be bound by thes
 
 ## 2. License Grant
 
-We grant you a worldwide, royalty-free, non-exclusive, non-transferable, non-sublicensable license to install and use the Software at no cost, for any lawful purpose — including personal, freelance, studio, and commercial use.
+For AnotherPlayer v1, we grant you a worldwide, royalty-free, non-exclusive, non-transferable, non-sublicensable license to install and use the Software at no cost, for any lawful purpose — including personal, freelance, studio, and commercial use.
 
-The Software is free for all users. There is no paid tier, license key, or registration required to use any v1 feature.
+All v1 features are free for all users. There is no paid tier, license key, or registration required to use any v1 feature.
 
 ## 3. Restrictions
 
@@ -29,7 +29,7 @@ Any delay or failure by Binbox Games to enforce a license restriction does not w
 
 Once available, optional donations to support continued development of the Software will be processed by Paddle.com Market Ltd. as Merchant of Record. Paddle's buyer terms will govern donation payment processing, tax, invoices, and refunds.
 
-Donations are voluntary contributions to development. They do not purchase a license, do not grant any additional rights beyond those granted in Section 2, and do not create any service-level commitment. AnotherPlayer remains fully free regardless of whether you donate.
+Donations are voluntary contributions to development. They do not purchase a license, do not grant any additional rights beyond those granted in Section 2, and do not create any service-level commitment. AnotherPlayer v1 remains fully free regardless of whether you donate.
 
 If you have not made a donation, Section 4 does not apply to you.
 

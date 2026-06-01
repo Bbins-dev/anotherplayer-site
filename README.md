@@ -23,7 +23,7 @@ Landing page for **AnotherPlayer** — native sample browser for Mac and Windows
 
 ## License model
 
-- **AnotherPlayer is free for everyone** — personal, freelance, studio, commercial. No license key, no registration, no paywall.
+- **AnotherPlayer v1 is free for everyone** — personal, freelance, studio, commercial. No license key, no registration, no paywall for v1 features.
 - Optional donation checkout launches with the v1.0 GA release. Until then, the `/pricing` page renders 6 donation tier buttons in coming-soon (aria-disabled) state. See `script.js` `DONATION_ENABLED` flag for the swap point.
 - Contact: `contact@binboxgames.com`
 

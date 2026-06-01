@@ -6,7 +6,7 @@ This Privacy Policy explains how Binbox Games ("we", "us") handles personal info
 
 ## 1. Summary
 
-AnotherPlayer is free for everyone. We do not require an account, email address, or any other personal information to download or use the Software. We do not embed third-party advertising, behavioral analytics, or telemetry in v1.
+AnotherPlayer v1 is free for everyone. We do not require an account, email address, or any other personal information to download or use v1. We do not embed third-party advertising, behavioral analytics, or telemetry in v1.
 
 The only personal information processed is what the hosting provider records to deliver and protect the site (described in Section 2), and — when you choose to make an optional donation — what the donation Merchant of Record needs to process payment (described in Section 4, applicable only once donations launch).
 

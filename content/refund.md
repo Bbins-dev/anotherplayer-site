@@ -2,9 +2,9 @@
 
 **Effective date:** 2026-05-16
 
-## 1. AnotherPlayer is free
+## 1. AnotherPlayer v1 is free
 
-AnotherPlayer is free for all users — personal, freelance, studio, and commercial. There is no purchase to refund.
+AnotherPlayer v1 is free for all users — personal, freelance, studio, and commercial. There is no purchase required for v1 use.
 
 If you downloaded the Software and it does not work for you, simply stop using it; nothing was charged.
 

@@ -1,6 +1,6 @@
-# Free for everyone
+# v1 is free for everyone
 
-AnotherPlayer is **free** — for personal use, freelance work, studios, and commercial projects alike.
+AnotherPlayer v1 is **free** — for personal use, freelance work, studios, and commercial projects alike.
 
 No license key. No registration. No paywall.
 
@@ -42,7 +42,7 @@ If AnotherPlayer is useful to you, you can support continued development with an
     <a class="donate-tier" data-donation-tier="200" href="#">$200</a>
     <a class="donate-tier" data-donation-tier="custom" href="#">Custom</a>
   </div>
-  <p class="donate-note">100% optional. AnotherPlayer remains fully free regardless. Amounts shown are before tax; Paddle adds applicable tax at checkout.</p>
+  <p class="donate-note">100% optional. AnotherPlayer v1 remains fully free regardless. Amounts shown are before tax; Paddle adds applicable tax at checkout.</p>
 </div>
 
 ## FAQ
@@ -65,4 +65,4 @@ You may not redistribute, resell, sublicense, or reverse-engineer the Software. 
 
 ### Why is it free?
 
-AnotherPlayer is built for the sample-browsing workflow that audio professionals deal with every day. Making it free for everyone gets it into more hands faster — which makes the tool better through real-world feedback.
+AnotherPlayer is built for the sample-browsing workflow that audio professionals deal with every day. Making v1 free for everyone gets it into more hands faster — which makes the tool better through real-world feedback.
