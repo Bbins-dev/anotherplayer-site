@@ -482,6 +482,29 @@ main {
   height: auto;
 }
 
+/* 미니 플레이어 — 다른 스샷과 달리 창 자체가 주인공이라 프레임 크롬을 벗긴다.
+   ① 폭: 자산은 500px (Retina 2x) 이므로 250 CSS px 가 픽셀 정합. 다른 샷처럼 width:100% 로
+      1080px 까지 늘리면 2배 이상 업스케일돼 뭉개지고, 무엇보다 "작다" 는 메시지가 정반대가 된다.
+   ② 그림자: 이미지가 둥근 모서리를 알파로 갖고 있어 box-shadow 는 사각형으로 삐져나온다.
+      filter: drop-shadow 는 알파 윤곽을 따라가므로 창 모양 그대로 그림자가 진다. */
+.shot-frame-mini {
+  border: none;
+  background: none;
+  box-shadow: none;
+  overflow: visible;
+  width: 250px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.shot-frame-mini:hover {
+  box-shadow: none;
+}
+
+.shot-frame-mini img {
+  filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.45));
+}
+
 .shot figcaption {
   font-size: 16px;
   line-height: 1.6;
