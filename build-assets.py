@@ -81,7 +81,7 @@ def build_og_image(out_path):
 
     # Subhead
     sub_font = ImageFont.truetype(FONT_REGULAR, 36)
-    sub = "Native sample browser for professionals"
+    sub = "Audio player & sample browser for professionals"
     sb = draw.textbbox((0, 0), sub, font=sub_font)
     sw = sb[2] - sb[0]
     sx = (W - sw) // 2

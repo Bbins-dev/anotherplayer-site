@@ -1,7 +1,7 @@
 {
   "name": "AnotherPlayer",
   "short_name": "AnotherPlayer",
-  "description": "Native sample browser for professionals",
+  "description": "Audio player and sample browser for professionals",
   "start_url": "/",
   "display": "browser",
   "background_color": "#303446",
