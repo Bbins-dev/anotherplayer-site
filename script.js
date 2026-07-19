@@ -8,7 +8,7 @@ const RELEASE_FALLBACK = {
   macDmgUrl: 'https://download.anotherplayer.com/AnotherPlayer-1.0.43.dmg',
   winSetupUrl: 'https://download.anotherplayer.com/AnotherPlayer-1.0.43-Setup.exe',
 };
-const DOWNLOAD_LATEST = 'https://download.anotherplayer.com/';
+const DOWNLOAD_OPTIONS = '/pricing/#download-platforms';
 
 // Backend API (Cloudflare Workers). Used by the custom-amount donation flow.
 const API_BASE = 'https://api.binboxgames.com';
@@ -66,7 +66,7 @@ function applyReleaseMeta() {
 }
 
 // /pricing 의 Free Download CTA — OS auto-detect + label swap.
-// Hero CTA is static href="/pricing" + label "Download AnotherPlayer" so JS does not touch it.
+// Hero CTA is static href="/pricing/" + label "Download AnotherPlayer" so JS does not touch it.
 // Only the label span receives a textContent update (arrow icon preserved).
 function applyCTA(os) {
   const release = currentRelease();
@@ -81,8 +81,8 @@ function applyCTA(os) {
     freeCTA.href = release.winSetupUrl;
     freeLabel.textContent = 'Download for Win';
   } else {
-    freeCTA.href = DOWNLOAD_LATEST;
-    freeLabel.textContent = 'Download';
+    freeCTA.href = DOWNLOAD_OPTIONS;
+    freeLabel.textContent = 'Choose Windows or Mac';
   }
 }
 

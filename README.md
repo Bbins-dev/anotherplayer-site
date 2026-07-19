@@ -8,6 +8,7 @@ Landing page for **AnotherPlayer** — native sample browser for Mac and Windows
 - **Domain**: `anotherplayer.com` (Cloudflare DNS)
 - **Binary host**: Cloudflare R2 (`download.anotherplayer.com`)
 - **Build**: vanilla HTML/CSS/JS — no framework, no NPM, no runtime CDN
+- **URL contract**: Cloudflare Pages directory routes use trailing-slash canonicals (`/pricing/`). Internal links, `rel="canonical"`, and `sitemap.xml` must use the same final URL.
 - **Font**: Geist Sans (SIL Open Font License 1.1, self-hosted woff2)
 - **JS**: OS auto-detect + CTA URL swap + `DONATION_ENABLED` feature flag (donation modal deferred until backend go-live)
 

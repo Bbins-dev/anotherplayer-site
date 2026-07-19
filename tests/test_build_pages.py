@@ -92,9 +92,9 @@ def test_build_page_replaces_path(tmp_path):
         template_path=scripts_dir / "template.html",
         output_path=out_path,
         title="Pricing — AnotherPlayer",
-        path="/pricing",
+        path="/pricing/",
     )
 
     out_html = out_path.read_text()
-    assert 'href="https://anotherplayer.com/pricing"' in out_html
+    assert 'href="https://anotherplayer.com/pricing/"' in out_html
     assert "{{path}}" not in out_html  # placeholder fully replaced

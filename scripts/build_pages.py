@@ -102,10 +102,10 @@ def build_page(
 
 
 PAGES = [
-    ("pricing", "Pricing — AnotherPlayer", "/pricing"),
-    ("terms", "Terms of Service — AnotherPlayer", "/terms"),
-    ("privacy", "Privacy Policy — AnotherPlayer", "/privacy"),
-    ("refund", "Refund Policy — AnotherPlayer", "/refund"),
+    ("pricing", "Pricing — AnotherPlayer", "/pricing/"),
+    ("terms", "Terms of Service — AnotherPlayer", "/terms/"),
+    ("privacy", "Privacy Policy — AnotherPlayer", "/privacy/"),
+    ("refund", "Refund Policy — AnotherPlayer", "/refund/"),
 ]
 
 

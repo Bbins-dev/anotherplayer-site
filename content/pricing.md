@@ -10,12 +10,12 @@ No license key. No registration. No paywall.
     <p class="pricing-tagline"><strong>v1</strong> · free forever</p>
     <p class="pricing-version">currently <span class="pricing-version-num">1.0.28</span></p>
     <p class="pricing-price"><span class="amount">$0</span></p>
-    <a class="pricing-cta pricing-cta-primary" id="free-download-cta" href="https://download.anotherplayer.com/"><span class="cta-arrow" aria-hidden="true">↓</span> <span class="cta-label">Download</span></a>
-    <p class="pricing-os-toggle">
+    <a class="pricing-cta pricing-cta-primary" id="free-download-cta" href="/pricing/#download-platforms"><span class="cta-arrow" aria-hidden="true">↓</span> <span class="cta-label">Choose Windows or Mac</span></a>
+    <div class="pricing-os-toggle" id="download-platforms">
       <a href="#" class="toggle-link" data-os="win">Windows 10+</a>
       <span class="toggle-dot" aria-hidden="true">·</span>
       <a href="#" class="toggle-link" data-os="mac">macOS 11+</a>
-    </p>
+    </div>
     <ul class="pricing-features">
       <li>All v1 features</li>
       <li>Any use — personal, freelance, studio, commercial</li>
@@ -63,7 +63,7 @@ You can support development with an optional donation — see the tiers above. A
 
 ### Are there any restrictions on use?
 
-You may not redistribute, resell, sublicense, or reverse-engineer the Software. See [Terms of Service](/terms) for the full license grant. Other than that, use it however you want.
+You may not redistribute, resell, sublicense, or reverse-engineer the Software. See [Terms of Service](/terms/) for the full license grant. Other than that, use it however you want.
 
 ### Why is it free?
 
